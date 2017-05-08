@@ -1,0 +1,15 @@
+=== DEVLOG FOR TEAM TEAM SHARIAR ===
+
+Project Manager: Edmond Lam
+
+Members: Lorenz Vargas, Daniel Monteagudo, Xinhui Xu
+
+=== DEVLOG BEGINS HERE ===
+
+===
+eLam 5/7/17 10:02 PM
+
+-Design document, github repository with basic folders, devlog, and empty app created.
+
+-Also, 2dr 1985 Toyota Sprinter Trueno GT-APEX in 'Black/White Panda'
+===
