@@ -13,3 +13,6 @@ eLam 5/7/17 10:02 PM
 
 -Also, 2dr 1985 Toyota Sprinter Trueno GT-APEX in 'Black/White Panda'
 ===
+xXu 5/12/17 6:06 PM
+
+-initiated templates/static/utils/data files
