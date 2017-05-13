@@ -13,11 +13,25 @@ eLam 5/7/17 10:02 PM
 
 -Also, 2dr 1985 Toyota Sprinter Trueno GT-APEX in 'Black/White Panda'
 ===
+
+===
 xXu 5/12/17 6:06 PM
 
 -initiated templates/static/utils/data files
+===
+
 ===
 dMonteagudo 5/13/17 1:31 PM
 
 -Created basic login system flask outline
 -Set made skeleton functions in database.py for reference
+===
+
+===
+eLam 5/7/17 6:57 PM
+
+-Organized some files around, design doc has been in submodule for a while.
+
+-Boosted morale with a meme. Please check it out.
+===
+
