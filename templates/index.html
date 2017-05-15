@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kakukaku!!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/style.css">
+  </head>
+
+  <body>
+    <div class="full container-fluid">
+      <div class="row">
+	<div class="card" style="width: 20em">
+
+	  <h3 class="card-header text-center">Kakukaku!!</h3>
+	  <div class="card-block">
+	    
+	    {% if msg is defined %}
+	    <div class="alert alert-success alert-dismissible" role="alert">
+	      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      {{msg}}
+	    </div>
+	    
+	    {% endif %}
+
+	    <form class="form-horizontal" name="auth" action="/auth/" method="POST">
+	      <div class="form-group">
+		<input class="form-control" placeholder="Username" type="text" name="user">
+	      </div>
+	      
+	      <div class="form-group">
+		<input class="form-control" placeholder="Password" type="password" name="pass">
+		
+	      </div>
+	      
+	      <div class="btn-group" role="group" style="margin:auto;"  aria-label="auth">
+		<button id="login" type="submit" name="login" value="Login" class="btn btn-primary">Login</button>
+		
+		<button id="register" type="submit" name="register" value="Register" class="btn btn-success">Register</button>
+	      </div>    
+	    </form>
+	    
+	  </div>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
