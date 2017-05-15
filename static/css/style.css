@@ -1,0 +1,39 @@
+body {
+    color: black;
+    text-align: center;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.navbar .glyphicon {
+    padding-right:0.5em;
+}
+
+.form-horizontal .glyphicon {
+    padding-right: 0.5em;
+}
+
+.home-form {
+    width: 85%;
+    margin: auto;
+}
+
+.full {
+    background-size: cover;
+    background-color: lightgray;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-group {
+    width:100%;
+}
+
+.btn {
+    width: 50%;
+}
