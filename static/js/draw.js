@@ -24,7 +24,6 @@ var stoImage = function() {
 
 var countDown = function(e) {
     timer.innerHTML = parseInt(timer.innerHTML) - 1;
-    console.log(timer.innerHTML);
     if (timer.innerHTML == "0") {
 	window.clearInterval(counter);
     }

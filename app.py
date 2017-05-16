@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import hashlib
 from utils import database as db
 
+app = Flask(__name__)
+
 @app.route("/")
 def mainpage():
     if 'username' in session:
@@ -9,6 +11,13 @@ def mainpage():
     else:
         return redirect(url_for("login"))
 
+@app.route("/draw")
+def draw():
+    return render_template("match.html")
+
+@app.route("/uploadPic", methods=["POST"])
+def upload():
+    return "<img src='%s' alt='somethingorother'>" % request.form["pic"]
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -37,3 +46,7 @@ def register():
     password = password.hexdigest()
     db.createUser(username,str(password))
     return render_template("loginpage.html")
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
