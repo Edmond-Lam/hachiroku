@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import hashlib
+import hashlib, json
+import requests as req
 from utils import database as db
 
 app = Flask(__name__)
@@ -17,7 +18,10 @@ def draw():
 
 @app.route("/uploadPic", methods=["POST"])
 def upload():
-    return "<img src='%s' alt='somethingorother'>" % request.form["pic"]
+    things = { "file" : request.form["pic"], "upload_preset" : "bf17cjwp" }
+    upload = req.post("https://api.cloudinary.com/v1_1/dhan3kbrs/auto/upload", data=things)
+    response = upload.json()["secure_url"]
+    return response
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
