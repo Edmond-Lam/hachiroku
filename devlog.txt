@@ -36,5 +36,10 @@ eLam 5/7/17 6:57 PM
 ===
 dMonteagudo 5/15/17 9:54 PM
 
--Mostly finished timing and setup for uploading drawing and uploading photos in js.
+-Mostly finished timing and setup for uploading drawing and uploading photos.
+
+-Saved image url to a hidden form for easy uploading
 ===
+dMonteagudo 5/15/17 10:45 PM
+
+-Added scroll to resize brush function.
