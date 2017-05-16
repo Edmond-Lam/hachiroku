@@ -1,3 +1,12 @@
+import hashlib
+import sqlite3
+
+#hashes password
+def hash(x):
+	h = hashlib.sha256()
+	h.update(x)
+	return h.hexdigest()
+
 # check_login takes a parameter for username and a hashed password
 # returns a boolean indicating whether the username-password pair is valid
 def check_login(username, hash_pass):
