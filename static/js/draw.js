@@ -9,7 +9,7 @@ var savedImage;
 var imgString;
 
 var stoImage = function() {
-    alert("DOING SHIT")
+    alert("Time's Up!!");
     imgString = canvas.toDataURL("image/jpeg");
     document.body.removeChild(canvas);
     document.body.removeChild(drawPreview);
