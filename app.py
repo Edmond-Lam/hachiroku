@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import hashlib, json
-import requests as req
 from utils import database as db
 
 app = Flask(__name__)

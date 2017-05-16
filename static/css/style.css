@@ -41,6 +41,7 @@ body {
 
 .btn {
     width: 50%;
+    font-weight: bold;
 }
 
 #login-header {
