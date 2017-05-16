@@ -16,3 +16,15 @@
     border: 5px dotted;
     border-radius: 50%;
 }
+
+body {
+    background: steelblue;
+}
+
+#doodle {
+    border: 1px solid black;
+}
+
+#savedImg {
+    border: 1px solid black;
+}

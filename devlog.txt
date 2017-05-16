@@ -34,4 +34,7 @@ eLam 5/7/17 6:57 PM
 
 -Boosted morale with a meme. Please check it out.
 ===
+dMonteagudo 5/15/17 9:54 PM
 
+-Mostly finished timing and setup for uploading drawing and uploading photos in js.
+===

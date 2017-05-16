@@ -7,23 +7,31 @@
   <body>
     <h1>Draw Something</h1>
     <div id="drawcircle"></div>
-    <canvas id="doodle" width="500px" height="500px" style="border: 1px solid;"></canvas>
-    <p>Stroke Width</p>
-    <input id="width" type="range" value="10" min="1" max="100"/>
-    <input id="draw" name="drawtoggle" checked="1" type="radio" value="Draw"/>Draw
-    <input id="erase" name="drawtoggle" type="radio" value="Erase"/>Erase
-    <br/>
-    <input id="cls" type="button" value="Clear Canvas"/>
-    <br/>
-    <br/>
-    <div class="container">
-      <div class="block" style="background-color:red"></div>
-      <div class="block" style="background-color:orange"></div>
-      <div class="block" style="background-color:yellow"></div>
-      <div class="block" style="background-color:green"></div>
-      <div class="block" style="background-color:blue"></div>
-      <div class="block" style="background-color:indigo"></div>
-      <div class="block" style="background-color:black"></div>
+    <canvas id="doodle" width="500px" height="500px"></canvas>
+    <img id="savedImg" alt="" src=""/>
+    <h3 id="timeleft">50</h3>
+    <div id="drawtools">
+      <p id="strokeweight">Stroke Width: 10</p>
+      <input id="width" type="range" value="10" min="1" max="100"/>
+      <br/>
+      <input id="draw" name="drawtoggle" checked="1" type="radio" value="Draw"/>Draw
+      <input id="erase" name="drawtoggle" type="radio" value="Erase"/>Erase
+      <br/>
+      <input id="cls" type="button" value="Clear Canvas"/>
+      <br/>
+      <br/>
+      <div id="blocks">
+	<div class="block" style="background-color:red"></div>
+	<div class="block" style="background-color:orange"></div>
+	<div class="block" style="background-color:yellow"></div>
+	<div class="block" style="background-color:green"></div>
+	<div class="block" style="background-color:blue"></div>
+	<div class="block" style="background-color:indigo"></div>
+	<div class="block" style="background-color:black"></div>
+      </div>
     </div>
+    <form action="/uploadPic" method="POST" id="datForm">
+      <input name="pic" type="hidden" value="" id="upload"/>
+    </form>
   </body>
 </html>
