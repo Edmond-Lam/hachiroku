@@ -26,7 +26,7 @@ def upload():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == "GET":
-        return render_template("loginpage.html")
+        return render_template("index.html")
     else:
         if 'username' in session:
             return redirect(url_for("mainpage"))
@@ -37,7 +37,7 @@ def login():
         if db.checkLogin(username, password):
             session['username'] = username;
             return redirect(url_for("mainpage"))
-        return render_template("loginpage.html")
+        return render_template("index.html")
 
 
 @app.route("/register", methods=['POST'])
@@ -49,7 +49,7 @@ def register():
     password.update(request.form['password'])
     password = password.hexdigest()
     db.createUser(username,str(password))
-    return render_template("loginpage.html")
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.debug = True
