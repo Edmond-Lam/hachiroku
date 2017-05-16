@@ -82,23 +82,39 @@ window.onload = function() {
     drawPreview = document.getElementById("drawcircle");
     timer = document.getElementById("timeleft");
     savedImage = document.getElementById("savedImg");
+    
     clear.onclick = function(e) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
+    
     for (var i = 0; i < document.getElementsByClassName("block").length; i++) {
 	document.getElementsByClassName("block")[i].addEventListener("click", function(e) {
 	    curColor = this.style.backgroundColor;
 	    drawPreview.style.borderColor = curColor;
 	});
     }
+    
     slider.onchange = function(e) {
 	strokeWeight = slider.value;
 	drawPreview.style.height = slider.value;
 	drawPreview.style.width = slider.value;
 	drawPreview.style.borderWidth = slider.value/20;
 	document.getElementById("strokeweight").innerHTML = "Stroke Width: " + slider.value;
-    }
-    canvas.onmousemove = function(e) {draw(e);}
+    };
+
+    canvas.onwheel = function(e) {
+	slider.value -= (e.deltaY / Math.abs(e.deltaY)) * 3;
+	strokeWeight = slider.value;
+	drawPreview.style.height = slider.value;
+	drawPreview.style.width = slider.value;
+	drawPreview.style.borderWidth = slider.value/12;
+	document.getElementById("strokeweight").innerHTML = "Stroke Width: " + slider.value;
+    };
+    
+    canvas.onmousemove = function(e) {
+	draw(e);
+    };
+    
     canvas.onmousedown = function(e) {
 	mouseDown = true;
 	draw(e);
