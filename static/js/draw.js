@@ -29,6 +29,7 @@ window.onload = function() {
 	strokeWeight = slider.value;
 	drawPreview.style.height = slider.value;
 	drawPreview.style.width = slider.value;
+	drawPreview.style.borderWidth = slider.value/20;
     }
     canvas.onmousemove = function(e) {
 	drawPreview.style.left = e.clientX - slider.value/2;
