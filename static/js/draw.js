@@ -102,13 +102,19 @@ window.onload = function() {
     };
 
     canvas.onwheel = function(e) {
-	slider.value -= (e.deltaY / Math.abs(e.deltaY)) * 3;
+	slider.value -= (e.deltaY / Math.abs(e.deltaY));
 	strokeWeight = slider.value;
 	drawPreview.style.height = slider.value;
 	drawPreview.style.width = slider.value;
 	drawPreview.style.borderWidth = slider.value/12;
 	document.getElementById("strokeweight").innerHTML = "Stroke Width: " + slider.value;
     };
+    
+    canvas.onmouseleave = function(e) {
+	mouseDown = false;
+	pmouseX = -1;
+	pmouseY = -1;
+    }
     
     canvas.onmousemove = function(e) {
 	draw(e);
@@ -118,6 +124,7 @@ window.onload = function() {
 	mouseDown = true;
 	draw(e);
     };
+    
     canvas.onmouseup = function(e) {
 	mouseDown = false;
 	pmouseX = -1;
