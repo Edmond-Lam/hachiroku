@@ -22,22 +22,33 @@ window.onload = function() {
     for (var i = 0; i < document.getElementsByClassName("block").length; i++) {
 	document.getElementsByClassName("block")[i].addEventListener("click", function(e) {
 	    curColor = this.style.backgroundColor;
+	    drawPreview.style.borderColor = curColor;
 	});
     }
-    canvas.onmousemove = function(e) {
+    slider.onchange = function(e) {
 	strokeWeight = slider.value;
+	drawPreview.style.height = slider.value;
+	drawPreview.style.width = slider.value;
+    }
+    canvas.onmousemove = function(e) {
+	drawPreview.style.left = e.clientX - slider.value/2;
+	drawPreview.style.top = e.clientY - slider.value/2;
+	
 	if (pmouseX > 0 && pmouseY > 0 && mouseDown) {
 	    if (drawbtn.checked) {
 		console.log(drawbtn.checked);
 		ctx.fillStyle = curColor;
 		ctx.strokeStyle = curColor;
+		drawPreview.style.borderColor = curColor;
 	    } else {
 		if (canvas.style.backgroundColor == "") {
 		    ctx.fillStyle = "#FFFFFF";
 		    ctx.strokeStyle = "#FFFFFF";
+		    drawPreview.style.borderColor = "#FFFFFF";
 		} else {
 		    ctx.fillStyle = canvas.style.backgroundColor;
 		    ctx.strokeStyle = canvas.style.backgroundColor;
+		    drawPreview.style.borderColor = canvas.style.backgroundColor;
 		}
 	    }
 	    ctx.beginPath();

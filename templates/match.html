@@ -6,16 +6,16 @@
   </head>
   <body>
     <h1>Draw Something</h1>
+    <div id="drawcircle"></div>
     <canvas id="doodle" width="500px" height="500px" style="border: 1px solid;"></canvas>
     <p>Stroke Width</p>
-    <input id="width" type="range" value="10"/>
+    <input id="width" type="range" value="10" min="1" max="100"/>
     <input id="draw" name="drawtoggle" checked="1" type="radio" value="Draw"/>Draw
     <input id="erase" name="drawtoggle" type="radio" value="Erase"/>Erase
     <br/>
     <input id="cls" type="button" value="Clear Canvas"/>
     <br/>
     <br/>
-    <div id="drawcircle"></div>
     <div class="container">
       <div class="block" style="background-color:red"></div>
       <div class="block" style="background-color:orange"></div>

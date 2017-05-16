@@ -8,3 +8,11 @@
 #doodle:hover {
     cursor: crosshair;
 }
+
+#drawcircle {
+    pointer-events: none;
+    display: block;
+    position: fixed;
+    border: 5px dotted;
+    border-radius: 50%;
+}
