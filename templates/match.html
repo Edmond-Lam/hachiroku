@@ -2,11 +2,28 @@
   <head>
     <title>Draw Something</title>
     <script src="../static/js/draw.js"></script>
+    <link href="../static/css/bloks.css" rel="stylesheet"/>
   </head>
   <body>
     <h1>Draw Something</h1>
     <canvas id="doodle" width="500px" height="500px" style="border: 1px solid;"></canvas>
-    p{Stroke Width}
+    <p>Stroke Width</p>
     <input id="width" type="range" value="10"/>
+    <input id="draw" name="drawtoggle" checked="1" type="radio" value="Draw"/>Draw
+    <input id="erase" name="drawtoggle" type="radio" value="Erase"/>Erase
+    <br/>
+    <input id="cls" type="button" value="Clear Canvas"/>
+    <br/>
+    <br/>
+    <div id="drawcircle"></div>
+    <div class="container">
+      <div class="block" style="background-color:red"></div>
+      <div class="block" style="background-color:orange"></div>
+      <div class="block" style="background-color:yellow"></div>
+      <div class="block" style="background-color:green"></div>
+      <div class="block" style="background-color:blue"></div>
+      <div class="block" style="background-color:indigo"></div>
+      <div class="block" style="background-color:black"></div>
+    </div>
   </body>
 </html>
