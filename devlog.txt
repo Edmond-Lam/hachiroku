@@ -51,3 +51,6 @@ dMonteagudo 5/16/17 9:57 PM
 -Added another template
 
 -Fixed things not being in snek_case.
+===
+lVargas 5/17/17 2:35PM
+- Added login functions in database.py
