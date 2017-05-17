@@ -98,7 +98,7 @@ window.onload = function() {
 	drawPreview.style.height = slider.value;
 	drawPreview.style.width = slider.value;
 	drawPreview.style.borderWidth = slider.value/20;
-	document.getElementById("strokeweight").innerHTML = "Stroke Width: " + slider.value;
+	document.getElementById("stroke-width").innerHTML = "Scroll to change brush size: " + slider.value;
     };
 
     canvas.onwheel = function(e) {
@@ -107,7 +107,7 @@ window.onload = function() {
 	drawPreview.style.height = slider.value;
 	drawPreview.style.width = slider.value;
 	drawPreview.style.borderWidth = slider.value/12;
-	document.getElementById("strokeweight").innerHTML = "Stroke Width: " + slider.value;
+	document.getElementById("stroke-width").innerHTML = "Scroll to change brush size: " + slider.value;
     };
     
     canvas.onmouseleave = function(e) {

@@ -11,7 +11,7 @@
     <div class="container-fluid">
       <br/>
       <h1>Keywords: {placeholder}</h1>
-      <h2 id="timeleft">50</h2>
+      <h2 id="timeleft">120</h2>
 
       <div class="d-flex flex-row justify-content-center">
 
@@ -19,12 +19,13 @@
 
 	    <canvas id="doodle" width="500px" height="500px"></canvas>
 	    <div id="drawcircle"></div>
-	  <img id="savedImg" alt="" src=""/>
+	    <img id="saved-img" alt="" src=""/>
 	  </div>
 
 	  <div class="p-2">
 	    <div id="blocks" class="vertical-flex">
 	      <div class="block" style="background-color:pink"></div>
+	      <div class="block" style="background-color:brown"></div>
 	      <div class="block" style="background-color:red"></div>
 	      <div class="block" style="background-color:orange"></div>
 	      <div class="block" style="background-color:yellow"></div>
@@ -40,8 +41,9 @@
 
 
       <div id="drawtools">
-	<p id="strokeweight">Stroke Width: 10</p>
-	<input id="width" type="range" value="10" min="1" max="100"/>
+	<p ><span id="stroke-width"> scroll to change brush size: 10</span>
+	  <input id="width" type="range" value="10" min="1" max="100"/>
+	</p>
 	<br/>
 	<input id="draw" name="drawtoggle" checked="1" type="radio" value="Draw"/>Draw
 	<input id="erase" name="drawtoggle" type="radio" value="Erase"/>Erase
