@@ -10,7 +10,6 @@ Members: Lorenz Vargas, Daniel Monteagudo, Xinhui Xu
 eLam 5/7/17 10:02 PM
 
 -Design document, github repository with basic folders, devlog, and empty app created.
-
 -Also, 2dr 1985 Toyota Sprinter Trueno GT-APEX in 'Black/White Panda'
 ===
 
@@ -31,26 +30,38 @@ dMonteagudo 5/13/17 1:31 PM
 eLam 5/7/17 6:57 PM
 
 -Organized some files around, design doc has been in submodule for a while.
-
 -Boosted morale with a meme. Please check it out.
+===
+
 ===
 dMonteagudo 5/15/17 9:54 PM
 
 -Mostly finished timing and setup for uploading drawing and uploading photos.
-
 -Saved image url to a hidden form for easy uploading
+===
+
 ===
 dMonteagudo 5/15/17 10:45 PM
 
 -Added scroll to resize brush function.
 ===
+
+===
 dMonteagudo 5/16/17 9:57 PM
 
 -Fixed a small bug in the drawing js.
-
 -Added another template
-
 -Fixed things not being in snek_case.
+===
+
 ===
 lVargas 5/17/17 2:35PM
 - Added login functions in database.py
+===
+
+===
+xXu 5/17/17 3:12PM
+- Continued styling match.html (drawing canvas, name might be unfitting)
+- Unified devlog styling
+===
+
