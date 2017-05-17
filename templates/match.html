@@ -7,23 +7,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/style.css">
   </head>
-  <body>
+  <body scroll="no" style="overflow:hidden">
     <div class="container-fluid">
+      <br/>
       <h1>Keywords: {placeholder}</h1>
       <h2 id="timeleft">50</h2>
-      <div id="drawcircle"></div>
-      <canvas id="doodle" width="500px" height="500px"></canvas>
-      <img id="savedImg" alt="" src=""/>
-      
-	<div id="blocks">
-	  <div class="block" style="background-color:red"></div>
-	  <div class="block" style="background-color:orange"></div>
-	  <div class="block" style="background-color:yellow"></div>
-	  <div class="block" style="background-color:green"></div>
-	  <div class="block" style="background-color:blue"></div>
-	  <div class="block" style="background-color:indigo"></div>
-	  <div class="block" style="background-color:black"></div>
-	</div>
+
+      <div class="d-flex flex-row justify-content-center">
+
+	  <div class="p-2">
+
+	    <canvas id="doodle" width="500px" height="500px"></canvas>
+	    <div id="drawcircle"></div>
+	  <img id="savedImg" alt="" src=""/>
+	  </div>
+
+	  <div class="p-2">
+	    <div id="blocks" class="vertical-flex">
+	      <div class="block" style="background-color:red"></div>
+	      <div class="block" style="background-color:orange"></div>
+	      <div class="block" style="background-color:yellow"></div>
+	      <div class="block" style="background-color:green"></div>
+	      <div class="block" style="background-color:blue"></div>
+	      <div class="block" style="background-color:indigo"></div>
+	      <div class="block" style="background-color:black"></div>
+	    </div>
+	  </div>
+
+      </div>
 
 
       <div id="drawtools">
