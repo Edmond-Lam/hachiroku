@@ -3,11 +3,12 @@ import hashlib, json
 from utils import database as db
 
 app = Flask(__name__)
+app.secret_key = "Maddy says hi"
 
 @app.route("/")
 def mainpage():
     if 'username' in session:
-        return render_template("home.html")
+        return render_template("index.html")
     else:
         return redirect(url_for("login"))
 
@@ -25,18 +26,18 @@ def upload():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == "GET":
-        return render_template("index.html")
+        return render_template("login.html")
     else:
         if 'username' in session:
             return redirect(url_for("mainpage"))
-        username = request.form['username']
+        username = request.form['user']
         password = hashlib.sha1()
-        password.update(request.form['password'])
+        password.update(request.form['pass'])
         password = password.hexdigest()
-        if db.checkLogin(username, password):
+        if db.check_login(username, password):
             session['username'] = username;
             return redirect(url_for("mainpage"))
-        return render_template("index.html")
+        return render_template("login.html")
 
 
 @app.route("/register", methods=['POST'])
@@ -47,8 +48,8 @@ def register():
     password = hashlib.sha1()
     password.update(request.form['password'])
     password = password.hexdigest()
-    db.createUser(username,str(password))
-    return render_template("index.html")
+    db.create_user(username,str(password))
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.debug = True

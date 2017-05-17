@@ -43,3 +43,11 @@ dMonteagudo 5/15/17 9:54 PM
 dMonteagudo 5/15/17 10:45 PM
 
 -Added scroll to resize brush function.
+===
+dMonteagudo 5/16/17 9:57 PM
+
+-Fixed a small bug in the drawing js.
+
+-Added another template
+
+-Fixed things not being in snek_case.
