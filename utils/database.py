@@ -1,16 +1,15 @@
 import hashlib
 import sqlite3
 
-# hashes password
+'''# hashes password
 def hash(password):
     h = hashlib.sha256()
     h.update(password)
-    return h.hexdigest()
+    return h.hexdigest()'''
 
 # check_login takes a parameter for username and a hashed password
 # returns a boolean indicating whether the username-password pair is valid
-def check_login(username, unhashed_pass):
-    hashed_pw = hash(unhashed_pass)
+def check_login(username, hashed_pw):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
@@ -32,11 +31,11 @@ def check_login(username, unhashed_pass):
 # create_user takes a username and password
 # returns whether user creation was successful
 # should always be true unless a username exists in db
-def create_user(username, unhashed_pass):
+def create_user(username, hashed_pass):
     path = "data/data.db"
     database = sqlite3.connect(path)
-    curse = db.cursor()
-    insert = "INSERT INTO users VALUES ('%s', '%s', '%s')" % (username, hash(unhashed_pass), 0)
+    curse = database.cursor()
+    insert = "INSERT INTO users VALUES (%d, '%s', '%s', '%s')" % (hash(username), username, hashed_pass, 0)
     curse.execute(insert)
     database.commit()
     database.close()

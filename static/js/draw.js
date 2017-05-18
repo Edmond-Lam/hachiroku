@@ -11,9 +11,14 @@ var imgString;
 var stoImage = function() {
     alert("Time's Up!!");
     imgString = canvas.toDataURL("image/jpeg");
-    document.body.removeChild(canvas);
-    document.body.removeChild(drawPreview);
-    document.body.removeChild(document.getElementById("drawtools"));
+    canvas.parentNode.removeChild(canvas);
+    drawPreview.parentNode.removeChild(drawPreview);
+    var drawtools = document.getElementsByClassName("drawtool");
+    console.log(drawtools);
+    for (var i = 0; i < drawtools.length; i++) {
+	console.log(drawtools[i]);
+	drawtools[i].parentNode.removeChild(drawtools[i]);
+    }
     savedImage.src = imgString;
     document.getElementById("upload").value = imgString;
     var submitbtn = document.createElement("input");
@@ -80,10 +85,12 @@ window.onload = function() {
     erasebtn = document.getElementById("erase");
     drawPreview = document.getElementById("drawcircle");
     timer = document.getElementById("timeleft");
-    savedImage = document.getElementById("savedImg");
+    savedImage = document.getElementById("saved-img");
     
     clear.onclick = function(e) {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#FFFFFF";
+	ctx.rect(0,0,canvas.width, canvas.height);
+	ctx.fill();
     };
     
     for (var i = 0; i < document.getElementsByClassName("block").length; i++) {
