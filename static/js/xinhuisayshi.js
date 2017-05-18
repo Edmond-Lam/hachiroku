@@ -30,7 +30,17 @@ var drawCircle = function(x, y, r, vx, vy) {
     } else {
 	circle.setAttribute("vy", vy);
     }
-    circle.setAttribute("r", r*2);
+    var grow = function() {
+	circle.setAttribute("r", parseInt(circle.getAttribute("r"))+2);
+    }
+    var interval = window.setInterval(function() {
+	if (parseInt(circle.getAttribute("r")) > r*2-1) {
+	    window.clearInterval(interval);
+	} else {
+	    grow()
+	}
+    }, .05);
+    circle.setAttribute("r", 1);//r*2);
     circle.setAttribute("fill", "hsl(" + rid % 360 + ", 90%, 60%)");
     //circle.setAttribute("fill", color);
     svg.appendChild(circle);
