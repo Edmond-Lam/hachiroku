@@ -50,3 +50,8 @@ def matches_available():
 # it returns a dict with keys 'word' and 'match_id'
 def get_existing_match():
     return {'word':'doggo', 'match_id':1248667}
+
+# make_new_match takes a word and the username of the player who started it
+# it returns the match_id of the new match being inserted into the database
+def make_new_match(word, username):
+    return hash(word + username)

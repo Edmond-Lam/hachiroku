@@ -23,6 +23,7 @@ var stoImage = function() {
     document.getElementById("upload").value = imgString;
     var submitbtn = document.createElement("input");
     submitbtn.type = "submit";
+    submitbtn.className = "btn col-sm-3";
     submitbtn.value = "Upload Picture";
     document.getElementById("datForm").appendChild(submitbtn);
 };
@@ -116,8 +117,13 @@ window.onload = function() {
 	drawPreview.style.borderWidth = slider.value/12;
 	document.getElementById("stroke-width").innerHTML = "Scroll to change brush size: " + slider.value;
     };
+
+    canvas.onmouseenter = function(e) {
+	drawPreview.style.display = "block";
+    };
     
     canvas.onmouseleave = function(e) {
+	drawPreview.style.display = "none";
 	mouseDown = false;
 	pmouseX = -1;
 	pmouseY = -1;

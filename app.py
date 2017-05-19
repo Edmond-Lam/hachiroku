@@ -22,12 +22,14 @@ def mainpage():
 
 @app.route('/draw')
 def draw():
-    word = get_new_word()
-    match_id = hash(session['username'])
     if db.matches_available():
         match_info = db.get_existing_match()
         word = match_info['word']
         match_id = match_info['match_id']
+    else:
+        word = get_new_word()
+        match_id = db.make_new_match(word, session['username'])
+        
     session['match_id'] = match_id
     return render_template('match.html', placeholder=word)
 
