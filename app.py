@@ -33,12 +33,23 @@ def draw():
     session['match_id'] = match_id
     return render_template('match.html', word=word)
 
+@app.route('/judge')
+def judge():
+    return "judgy"
+
+    
 @app.route('/uploadPic', methods=['POST'])
 def upload():
     things = { 'file' : request.form['pic'], 'upload_preset' : 'bf17cjwp' }
     upload = req.post('https://api.cloudinary.com/v1_1/dhan3kbrs/auto/upload', data=things)
-    response = upload.json()['secure_url']
-    return response + "<br>" + str(session.pop('match_id'))
+    picurl = upload.json()['secure_url']
+    if 'match_id' in session:
+        match_id = session.pop('match_id')
+    else:
+        return 'yikes'
+    if db.game_exists(match_id):
+        db.update_match(match_id, session['username'], picurl)
+    return picurl + "<br>" + str(match_id)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
