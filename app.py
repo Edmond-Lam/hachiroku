@@ -31,7 +31,7 @@ def draw():
         match_id = db.make_new_match(word, session['username'])
         
     session['match_id'] = match_id
-    return render_template('match.html', placeholder=word)
+    return render_template('match.html', word=word)
 
 @app.route('/uploadPic', methods=['POST'])
 def upload():

@@ -29,3 +29,10 @@ body {
 #savedImg {
     border: 1px solid black;
 }
+
+.sub-block {
+    position: absolute;
+    visibility: hidden;
+    margin-left: -25px;
+}
+

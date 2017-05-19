@@ -4,7 +4,7 @@ var mouseDown;
 var strokeWeight = 10;
 var timer, counter;
 var curColor, drawPreview;
-var drawbtn, erasebtn, slider;
+var slider;
 var savedImage;
 var imgString;
 
@@ -28,6 +28,13 @@ var stoImage = function() {
     document.getElementById("datForm").appendChild(submitbtn);
 };
 
+var clearExtras = function() {
+    for (var n = 0; n < document.getElementsByClassName("sub-block").length; n++) {
+	var subblock = document.getElementsByClassName("sub-block")[n];
+	subblock.style.visibility = "hidden";
+    }
+};
+
 var countDown = function(e) {
     if (timer.innerHTML == "0") {
 	timer.innerHTML = "Times Up!!";
@@ -42,21 +49,9 @@ var draw = function(e) {
     drawPreview.style.top = e.clientY - slider.value/2;
     
     if (pmouseX > 0 && pmouseY > 0 && mouseDown) {
-	if (drawbtn.checked) {
-	    ctx.fillStyle = curColor;
-	    ctx.strokeStyle = curColor;
-	    drawPreview.style.borderColor = curColor;
-	} else {
-	    if (canvas.style.backgroundColor == "") {
-		ctx.fillStyle = "#FFFFFF";
-		ctx.strokeStyle = "#FFFFFF";
-		drawPreview.style.borderColor = "#FFFFFF";
-	    } else {
-		ctx.fillStyle = canvas.style.backgroundColor;
-		ctx.strokeStyle = canvas.style.backgroundColor;
-		drawPreview.style.borderColor = canvas.style.backgroundColor;
-	    }
-	}
+	ctx.fillStyle = curColor;
+	ctx.strokeStyle = curColor;
+	drawPreview.style.borderColor = curColor;
 	ctx.beginPath();
 	ctx.arc(pmouseX, pmouseY, strokeWeight/2, 0, 2 * Math.PI, false);
 	ctx.fill();
@@ -81,8 +76,6 @@ window.onload = function() {
     curColor = "#000000"
     slider=document.getElementById("width");
     clear = document.getElementById("cls");
-    drawbtn = document.getElementById("draw");
-    erasebtn = document.getElementById("erase");
     drawPreview = document.getElementById("drawcircle");
     timer = document.getElementById("timeleft");
     savedImage = document.getElementById("saved-img");
@@ -98,9 +91,21 @@ window.onload = function() {
 	document.getElementsByClassName("block")[i].addEventListener("click", function(e) {
 	    curColor = this.style.backgroundColor;
 	    drawPreview.style.borderColor = curColor;
-	});
+	}, true);
     }
-    
+
+    for (var i = 0; i < document.getElementsByClassName("primary-block").length; i++) {
+	var primeblock = document.getElementsByClassName("primary-block")[i];
+	primeblock.onmouseover = function(e) {
+	    clearExtras();
+	    for (var j = 0; j < this.getElementsByClassName("sub-block").length; j++) {
+		var subblock = this.getElementsByClassName("sub-block")[j];
+		subblock.style.visibility = "initial";
+		subblock.style.marginLeft = 25 + (50 * (j));
+	    }
+	};
+    }
+
     slider.onchange = function(e) {
 	strokeWeight = slider.value;
 	drawPreview.style.height = slider.value;
@@ -119,6 +124,7 @@ window.onload = function() {
     };
 
     canvas.onmouseenter = function(e) {
+	clearExtras();
 	drawPreview.style.display = "block";
     };
     
