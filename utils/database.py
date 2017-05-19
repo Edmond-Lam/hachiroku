@@ -40,3 +40,13 @@ def create_user(username, hashed_pass):
     database.commit()
     database.close()
     return True
+
+# matches_available takes no parameters
+# returns a boolean indicating whether matches exist
+def matches_available():
+    return False
+
+# get_existing_match takes no parameters
+# it returns a dict with keys 'word' and 'match_id'
+def get_existing_match():
+    return {'word':'doggo', 'match_id':1248667}
