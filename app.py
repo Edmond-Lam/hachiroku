@@ -40,12 +40,13 @@ def login():
 
         if 'register' in request.form:
             db.create_user(username,str(password))
-            
+            return render_template('login.html', msg="Successfully Registered!!")
+    
         elif db.check_login(username, str(password)):
             session['username'] = username;
             return redirect(url_for('mainpage'))
-        
-        return render_template('login.html')
+        else:
+            return render_template('login.html', msg="Login invalid.")
 
 if __name__ == '__main__':
     app.debug = True

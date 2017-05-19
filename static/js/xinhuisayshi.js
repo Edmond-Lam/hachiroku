@@ -44,7 +44,6 @@ var drawCircle = function(x, y, r, vx, vy) {
     circle.setAttribute("fill", "hsl(" + rid % 360 + ", 90%, 60%)");
     //circle.setAttribute("fill", color);
     svg.appendChild(circle);
-    console.log("Circle at ( " + x + ", " + y + " )");
     return circle;
 };
 
@@ -105,7 +104,6 @@ var setup = function() {
     svg.setAttribute("width", window.innerWidth);
     svg.setAttribute("height", window.innerHeight);
     window.onresize = resize;
-    console.log(svg);
     circtimer = window.setInterval(linedot, 500);
     svg.addEventListener("click", linedot);
     draw();
