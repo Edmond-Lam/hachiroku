@@ -9,7 +9,7 @@ var savedImage;
 var imgString;
 
 var stoImage = function() {
-    alert("Time's Up!!");
+
     imgString = canvas.toDataURL("image/jpeg");
     canvas.parentNode.removeChild(canvas);
     drawPreview.parentNode.removeChild(drawPreview);
@@ -28,9 +28,11 @@ var stoImage = function() {
 };
 
 var countDown = function(e) {
-    timer.innerHTML = parseInt(timer.innerHTML) - 1;
     if (timer.innerHTML == "0") {
+	timer.innerHTML = "Times Up!!";
 	window.clearInterval(counter);
+    } else {
+	timer.innerHTML = parseInt(timer.innerHTML) - 1;
     }
 }
 
@@ -67,9 +69,6 @@ var draw = function(e) {
     pmouseY = e.offsetY;
 };
 
-window.setTimeout(stoImage, 50000);
-counter = window.setInterval(countDown, 1000);
-
 window.onload = function() {
     canvas = document.getElementById("doodle");
     ctx = canvas.getContext("2d");
@@ -86,7 +85,8 @@ window.onload = function() {
     drawPreview = document.getElementById("drawcircle");
     timer = document.getElementById("timeleft");
     savedImage = document.getElementById("saved-img");
-    
+    window.setTimeout(stoImage, parseInt(timer.innerHTML)*1000);
+    counter = window.setInterval(countDown, 1000);    
     clear.onclick = function(e) {
 	ctx.fillStyle = "#FFFFFF";
 	ctx.rect(0,0,canvas.width, canvas.height);
