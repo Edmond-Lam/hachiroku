@@ -65,3 +65,9 @@ xXu 5/17/17 3:12PM
 - Unified devlog styling
 ===
 
+===
+dMonteagudo 5/21/17 8:08 PM
+
+-Set up the judging system
+-Made the index.html file less useless
+===
