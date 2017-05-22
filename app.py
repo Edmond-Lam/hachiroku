@@ -33,11 +33,18 @@ def draw():
     session['match_id'] = match_id
     return render_template('match.html', word=word)
 
-@app.route('/judge')
+@app.route('/judge', methods=['GET', 'POST'])
 def judge():
-    return "judgy"
-
-    
+    if request.method == 'GET':
+        matchdata = db.get_finished_match()
+        session['matchdata'] = matchdata
+        return render_template('judge.html', matchdata=matchdata)
+    else:
+        matchdata = session.pop('matchdata')
+        winuser = str(int(request.form['winner']) + 1)
+        db.pick_winner(matchdata['match_id'], winuser)
+        return '<h1>User %s won match %s with:</h1> <img src="%s"/>' % (matchdata['user_' + winuser], matchdata['match_id'], matchdata['img_' + winuser])
+        
 @app.route('/uploadPic', methods=['POST'])
 def upload():
     things = { 'file' : request.form['pic'], 'upload_preset' : 'bf17cjwp' }

@@ -74,5 +74,21 @@ def game_exists(match_id):
 
 # update_match takes a match id, username, and picture url
 # doesn't really need to return anything but return a boolean just in case
-def update_match():
+def update_match(match_id, username, pic_url):
+    return True
+
+# get_finished_match takes no parameters
+# it returns a dict with the following keys:
+#   'word' : the word from the match
+#   'match_id' : the match id
+#   'user_1' and 'user_2' : the usernames of both users
+#   'img_1' and 'img_2' : the cloudinary urls of the images
+#   Note: user_1 should own img_1 and the same for user_2 and img_2
+def get_finished_match():
+    return {'word':'aardvark', 'user_1':'skilled_artist 123', 'user_2':'amateur doodler', 'img_1':'http://res.cloudinary.com/dhan3kbrs/image/upload/v1495060217/homk034qwc51fpbg50wx.jpg', 'img_2':'http://res.cloudinary.com/dhan3kbrs/image/upload/v1495059847/i7grncmpamkn9bd5y53x.jpg', 'match_id':143959858767}
+
+# pick_winner takes parameters match_id and winner
+# it sets the winner for the match in the database
+# it returns a boolean because why not
+def pick_winner(match_id, winner):
     return True

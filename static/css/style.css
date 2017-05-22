@@ -20,6 +20,10 @@ body {
     padding-right: 0.5em;
 }
 
+.glyphicon {
+    color: black;
+}
+
 .home-form {
     width: 85%;
     margin: auto;
