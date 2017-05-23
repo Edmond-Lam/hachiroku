@@ -73,13 +73,20 @@ def login():
 
         if 'register' in request.form:
             db.create_user(username,str(password))
-            return render_template('login.html', msg="Successfully Registered!!")
+            return render_template('login.html', msg="Successfully registered!", good=True)
     
         elif db.check_login(username, str(password)):
             session['username'] = username;
             return redirect(url_for('mainpage'))
         else:
-            return render_template('login.html', msg="Login invalid.")
+            return render_template('login.html', msg="Login invalid.", good=False)
+
+@app.route("/logout/")
+def logout():
+    if 'username' not in session:
+        redirect(url_for('login'))
+    session.pop('username')
+    return redirect(url_for("login", msg = "Logged out.", good=True))
 
 if __name__ == '__main__':
     app.debug = True
