@@ -44,6 +44,11 @@ def create_user(username, hashed_pass):
 # matches_available takes no parameters
 # returns a boolean indicating whether matches exist
 def matches_available():
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
+    db_result = {}
+    db_results = "SELECT" + "something"
     return False
 
 # get_existing_match takes no parameters
@@ -70,11 +75,17 @@ def make_new_match(word, username):
 # game_exists takes a match id
 # it returns a boolean indicating whether a game with the given id could be found in the database
 def game_exists(match_id):
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
     return False
 
 # update_match takes a match id, username, and picture url
 # doesn't really need to return anything but return a boolean just in case
 def update_match(match_id, username, pic_url):
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
     return True
 
 # get_finished_match takes no parameters
