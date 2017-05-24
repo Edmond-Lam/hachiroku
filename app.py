@@ -16,7 +16,7 @@ def get_new_word():
 @app.route('/')
 def mainpage():
     if 'username' in session:
-        return render_template('index.html')
+        return render_template('index.html', user=session['username'])
     else:
         return redirect(url_for('login'))
 
@@ -36,15 +36,21 @@ def draw():
 @app.route('/judge', methods=['GET', 'POST'])
 def judge():
     if request.method == 'GET':
-        matchdata = db.get_finished_match()
+        matchdata = db.get_judgable_match()
         session['matchdata'] = matchdata
         return render_template('judge.html', matchdata=matchdata)
     else:
-        matchdata = session.pop('matchdata')
+        matchid = session.pop('matchdata')['match_id']
         winuser = str(int(request.form['winner']) + 1)
         db.pick_winner(matchdata['match_id'], winuser)
-        return '<h1>User %s won match %s with:</h1> <img src="%s"/>' % (matchdata['user_' + winuser], matchdata['match_id'], matchdata['img_' + winuser])
-        
+        matchdata = db.get_match(matchid)
+        return render_template('gallery.html', matchdata = matchdata)#'<h1>User %s won match %s with:</h1> <img src="%s"/>' % (matchdata['user_' + winuser], matchdata['match_id'], matchdata['img_' + winuser])
+
+@app.route('/<username>')
+def profile(username):
+    matches = db.get_matches_for_user(username)
+    return render_template('profile.html', matches = matches)
+                           
 @app.route('/uploadPic', methods=['POST'])
 def upload():
     things = { 'file' : request.form['pic'], 'upload_preset' : 'bf17cjwp' }

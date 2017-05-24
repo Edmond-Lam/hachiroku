@@ -83,12 +83,27 @@ def update_match(match_id, username, pic_url):
 #   'match_id' : the match id
 #   'user_1' and 'user_2' : the usernames of both users
 #   'img_1' and 'img_2' : the cloudinary urls of the images
+#   'winner' : either 'user_1' or 'user_2'
 #   Note: user_1 should own img_1 and the same for user_2 and img_2
-def get_finished_match():
+def get_judgable_match():
     return {'word':'aardvark', 'user_1':'skilled_artist 123', 'user_2':'amateur doodler', 'img_1':'http://res.cloudinary.com/dhan3kbrs/image/upload/v1495060217/homk034qwc51fpbg50wx.jpg', 'img_2':'http://res.cloudinary.com/dhan3kbrs/image/upload/v1495059847/i7grncmpamkn9bd5y53x.jpg', 'match_id':143959858767}
+
+# get_finished_match takes no parameters
+# it returns a dict with the same keys as get_judgable_match but with a winner
+def get_finished_match():
+    return get_judgable_match().update({'winner':'user_1'})
+
+# get_match returns a dict like get_finished_match but for a specific match_id
+def get_match(match_id):
+    return get_finished_match()
 
 # pick_winner takes parameters match_id and winner
 # it sets the winner for the match in the database
 # it returns a boolean because why not
 def pick_winner(match_id, winner):
     return True
+
+# get_matches_for_user takes a username
+# it returns a list of get_finished_match dicts
+def get_matches_for_user(username):
+    return get_finished_match()
