@@ -4,6 +4,8 @@ import requests as req
 from utils import database as db
 import random
 
+#ADD COMMENTS DANIEL
+
 app = Flask(__name__)
 app.secret_key = 'Maddy says hi'
 
