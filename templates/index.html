@@ -7,25 +7,27 @@
     <title>Home | Kakukaku!!</title>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-	<div class="col-sm-8">
-	  <h1>Welcome to Kakukaku!</h1>
-	</div>
-	<div class="col-sm-4">
-	  <h2 style="display: inline"><a class="glyphicon" href="/notifs"><i class="fa fa-bell" aria-hidden="true"></i></a></h2>
-	  <h2 style="display: inline"><a class="glyphicon" href="/profile"><i class="fa fa-user" aria-hidden="true"></i></a></h2>
+	<div class="nav">
+	  <h2><a class="glyphicon" href="/notifs"><i class="fa fa-bell" aria-hidden="true"></i></a></h2>
+	  <h2><a class="glyphicon" href="/profile"><i class="fa fa-user" aria-hidden="true"></i></a></h2>
 	  <a href="/logout/"><span class="glyphicon"></span> Logout</a>
-</div>
-      </div>
-      <div class="row">	
-	<div class="col-md-6">
-	  <h2><a class="btn btn-default" href="/draw">Draw something</a></h2>
-	  <h2><a class="btn btn-default" href="/judge">Judge a game</a></h2>
 	</div>
-	<div class="col-md-6">
-	  <h2><a class="btn btn-default" href="/gallery">View all your matches</a></h2>
+
+	<div class="full">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col">
+		<a class="btn btn-primary btn-index" href="/draw" role="button">Draw something</a>
+		<a class="btn btn-primary btn-index" href="/judge" role="button">Judge a game</a>
+	      </div>
+
+	      <div class="col">
+		<a class="btn btn-default" href="/gallery">View all your matches</a>
+	      </div>
+
+	    </div>
+	  </div>
 	</div>
-      </div>
+
   </body>
 </html>

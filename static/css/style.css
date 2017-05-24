@@ -8,22 +8,6 @@ body {
     text-align: center;
 }
 
-.navbar {
-    border-radius: 0px;
-}
-
-.navbar .glyphicon {
-    padding-right:0.5em;
-}
-
-.form-horizontal .glyphicon {
-    padding-right: 0.5em;
-}
-
-.glyphicon {
-    color: black;
-}
-
 .home-form {
     width: 85%;
     margin: auto;
@@ -31,7 +15,6 @@ body {
 
 .full {
     background-size: cover;
-    background-color: lightgray;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -66,4 +49,14 @@ body {
 
 #saved-img {
     border: none;
+}
+
+.nav {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.btn-index {
+    margin: 0.75em;
 }
