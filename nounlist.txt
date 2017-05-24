@@ -221,6 +221,7 @@ authorisation
 authority
 authorization
 automaton
+automobile
 avalanche
 avenue
 average
@@ -1683,6 +1684,7 @@ fundraising
 funeral
 funny
 fur
+furry
 furnace
 furniture
 fusarium
@@ -2488,6 +2490,7 @@ megaliac
 melody
 member
 membership
+meme
 memory
 men
 menorah
@@ -4248,6 +4251,7 @@ tune-up
 tunic
 tunnel
 turban
+turbocharger
 turkish
 turn
 turnip
