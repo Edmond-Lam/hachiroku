@@ -1,19 +1,33 @@
 <html>
   <head>
     <title>Profile</title>
+    <style>
+      .winner {
+      border: 3px solid green;
+      }
+    </style>
   </head>
   <body>
     {% for match in matches %}
+    <h2>Match {{match["match_id"]}}</h2>
     <div class="match">
+      {% if match["winner"] == "user_1" %}
       <div class="user1" style="display: inline-block;">
-	<h3>{{match["user_1"]}}</h3>
-	<img alt="" src="{{match['img_1']}}" style="display: inline-block;"/>
-      </div>
-      <div class="user2">
-	<h3>{{match["user_2"]}}</h3>
-	<img alt="" src="{{match['img_2']}}" style="display: inline-block;"/>
-      </div>
-    </div>
-    {% endfor %}
+	{% else %}
+	<div class="user1 winner" style="display: inline-block;">
+	  {% endif %}
+	  <h3>{{match["user_1"]}}</h3>
+	  <img alt="" src="{{match['img_1']}}" style="display: inline-block;"/>
+	</div>
+	{% if match["winner"] == "user_2" %}
+	<div class="user2" style="display: inline-block;">
+	  {% else %}
+	  <div class="user2 winner" style="display: inline-block;">
+	    {% endif %}
+	    <h3>{{match["user_2"]}}</h3>
+	    <img alt="" src="{{match['img_2']}}" style="display: inline-block;"/>
+	  </div>
+	</div>
+	{% endfor %}
   </body>
 </html>

@@ -102,7 +102,9 @@ def get_judgable_match():
 # get_finished_match takes no parameters
 # it returns a dict with the same keys as get_judgable_match but with a winner
 def get_finished_match():
-    return get_judgable_match().update({'winner':'user_1'})
+    match = get_judgable_match()
+    match.update({'winner':'user_1'})
+    return match
 
 # get_match returns a dict like get_finished_match but for a specific match_id
 def get_match(match_id):
@@ -117,4 +119,4 @@ def pick_winner(match_id, winner):
 # get_matches_for_user takes a username
 # it returns a list of get_finished_match dicts
 def get_matches_for_user(username):
-    return [get_finished_match()]
+    return [get_finished_match(), get_finished_match()]
