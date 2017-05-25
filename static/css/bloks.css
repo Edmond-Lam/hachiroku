@@ -10,6 +10,18 @@
     cursor: crosshair;
 }
 
+.eraser-blok {
+    overflow: hidden;
+}
+
+.eraser {
+    width: 80%;
+    height: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+    border: none;
+}
+
 #drawcircle {
     pointer-events: none;
     display: block;
