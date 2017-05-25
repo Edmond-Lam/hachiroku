@@ -117,4 +117,4 @@ def pick_winner(match_id, winner):
 # get_matches_for_user takes a username
 # it returns a list of get_finished_match dicts
 def get_matches_for_user(username):
-    return get_finished_match()
+    return [get_finished_match()]

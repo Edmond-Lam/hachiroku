@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Profile</title>
+  </head>
+  <body>
+    {% for match in matches %}
+    <div class="match">
+      <div class="user1" style="display: inline-block;">
+	<h3>{{match["user_1"]}}</h3>
+	<img alt="" src="{{match['img_1']}}" style="display: inline-block;"/>
+      </div>
+      <div class="user2">
+	<h3>{{match["user_2"]}}</h3>
+	<img alt="" src="{{match['img_2']}}" style="display: inline-block;"/>
+      </div>
+    </div>
+    {% endfor %}
+  </body>
+</html>

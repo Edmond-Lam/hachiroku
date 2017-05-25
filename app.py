@@ -48,9 +48,10 @@ def judge():
         matchdata = db.get_match(matchid)
         return render_template('gallery.html', matchdata = matchdata)#'<h1>User %s won match %s with:</h1> <img src="%s"/>' % (matchdata['user_' + winuser], matchdata['match_id'], matchdata['img_' + winuser])
 
-@app.route('/<username>')
+@app.route('/profile/<username>')
 def profile(username):
     matches = db.get_matches_for_user(username)
+    print matches
     return render_template('profile.html', matches = matches)
                            
 @app.route('/uploadPic', methods=['POST'])
