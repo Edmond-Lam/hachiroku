@@ -83,3 +83,8 @@ dMonteagudo 5/25/17 2:58 PM
 
 -Set up profile page and associated routes
 ===
+===
+dMonteagudo 5/26/17 2:32 PM
+
+-Also added comments that were actually useful.
+===
