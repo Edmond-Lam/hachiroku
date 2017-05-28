@@ -83,3 +83,25 @@ dMonteagudo 5/25/17 2:58 PM
 
 -Set up profile page and associated routes
 ===
+
+===
+lVargas 5/27/17 10:45
+- Finished database work (moderately tested)
+	- Functions added:
+		- check_login
+		- create_user
+		- get_username
+		- matches_available
+		- get_existing_match
+		- make_new_match
+		- game_exists
+		- update_user_2
+		- update_pic_1
+		- update_pic_2
+		- update_judge
+		- update_winner
+		- get_judgable_match
+		- get_finished_match
+		- get_match
+		- pick_winner
+		- get_matches_for_user
