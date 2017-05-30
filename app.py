@@ -50,6 +50,7 @@ def judge():
     # Gets a judgable match and passes it to judge.html
     if request.method == 'GET':
         matchdata = db.get_judgable_match()
+        print matchdata
         session['matchdata'] = matchdata
         return render_template('judge.html', matchdata=matchdata)
     # Removes matchdata from the session so it's not cluttered then sets the winner in the database
@@ -84,7 +85,11 @@ def upload():
         return 'yikes'
     # If the game exists, update it with the picurl.
     if db.game_exists(match_id):
-        db.update_match(match_id, session['username'], picurl)
+        if db.get_match(match_id)['img_1'] == None:
+            db.update_pic_1(match_id, picurl)
+        else:
+            db.update_pic_2(match_id, picurl)
+        #db.update_match(match_id, session['username'], picurl)
     return picurl + "<br>" + str(match_id)
 
 # Login route
