@@ -14,3 +14,6 @@ A rank system is also implemented to rate the skills of each drawer—you will g
 
 
 ![alt text](http://i.imgur.com/WsBAZ11.png "Meme 3")
+
+
+![alt text](http://i.imgur.com/8QQowfu.png "Meme 4")
