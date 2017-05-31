@@ -46,7 +46,7 @@ def get_username(userid):
     database = sqlite3.connect(path)
     curse = database.cursor()
     # get user id
-    user_query = "SELECT user_id FROM users WHERE username = ?"
+    user_query = "SELECT username FROM users WHERE user_id = ?"
     user_result = curse.execute(user_query,(userid,))
     user_result = user_result.fetchone()
     print "USER RESULT:", user_result
