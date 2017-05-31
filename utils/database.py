@@ -35,8 +35,8 @@ def create_user(username, hashed_pass):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    insert = "INSERT INTO users VALUES (%d, '%s', '%s', '%s')" % (hash(username), username, hashed_pass, 0)
-    curse.execute(insert)
+    insert = "INSERT INTO users VALUES (?,?,?,?)"
+    curse.execute(insert,(hash(username), username, hashed_pass, 0))
     database.commit()
     database.close()
     return True
@@ -46,9 +46,11 @@ def get_username(userid):
     database = sqlite3.connect(path)
     curse = database.cursor()
     # get user id
-    user_query = "SELECT user_id FROM users WHERE username = '%u'" % (username)
-    user_result = curse.execute(user_query)
-    if len(user_result) == 0:
+    user_query = "SELECT user_id FROM users WHERE username = ?"
+    user_result = curse.execute(user_query,(userid,))
+    user_result = user_result.fetchone()
+    print "USER RESULT:", user_result
+    if user_result == None:
         return -1
     user_id = int(user_result[0])
     return user_id
@@ -60,8 +62,10 @@ def matches_available():
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT * FROM matches WHERE user_2 NOT NULL"
+    query =  "SELECT * FROM matches WHERE user_2 is NULL"
     db_result = curse.execute(query)
+    db_result = db_result.fetchall()
+    print db_result
     if not db_result:
         return False
     return True
@@ -72,13 +76,23 @@ def get_existing_match():
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    results = {}
-    query =  "SELECT word, match_id FROM matches"
+    results = []
+    query =  'SELECT * FROM matches WHERE pic_2 is NULL OR pic_1 is NULl'
     db_result = curse.execute(query)
-    for word, match_id in db_result:
-        result = {'word': word, 'match_id': match_id}
-        results.append(result)
-    return results
+    db_result = db_result.fetchone()
+    if len(db_result) == 0:
+        return {}
+    result = {
+        'word': db_result[1],
+        'match_id': db_result[0],
+        'user_1': db_result[2],
+        'user_2': db_result[4],
+        'img_1': db_result[3],
+        'img_2': db_result[5],
+        'winner': db_result[7],
+        'judge': db_result[6]
+    }
+    return result
 
 # test
 # print get_existing_match()
@@ -95,14 +109,16 @@ def make_new_match(word, username):
     user_id = get_username(username)
     if user_id == -1:
         return -1
-    match_query = "INSERT INTO matches (user_1, word) VALUES ('%i', '%w')" % (user_id, word)
+    match_query = "INSERT INTO matches (user_1, word) VALUES (?, ?)" 
     # amt_of_entries = len(curse.fetchall())+1
-    curse.execute(match_query)
+    curse.execute(match_query,(user_id, word))
     database.commit()
     # get new match id
     new_match_id = 0
-    new_match_query = "SELECT match_id FROM matches WHERE user_1 = '%u' AND word = '%u'" % (user_id, word)
-    new_match_result = curse.execute(new_match_query)
+    new_match_query = "SELECT match_id FROM matches WHERE user_1 = ? AND word = ?"
+    new_match_result = curse.execute(new_match_query,(user_id, word))
+    new_match_result = new_match_result.fetchall()
+    print new_match_result
     new_match_id = new_match_result[0]
     database.close()
     return new_match_id
@@ -113,8 +129,8 @@ def game_exists(match_id):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    query = "SELECT match_id FROM matches WHERE match_id = '%m'" % (match_id)
-    result = curse.execute(query)
+    query = "SELECT match_id FROM matches WHERE match_id = ?" 
+    result = curse.execute(query,(match_id,))
     if len(query) > 0:
         return True
     return False
@@ -129,8 +145,8 @@ def update_user_2(match_id, username):
     user_id = get_username(username)
     if user_id == -1:
         return -1
-    query = "UPDATE matches SET user_2 = '%u' where match_id = '%m'" % (user_id, match_id)
-    curse.execute(query)
+    query = "UPDATE matches SET user_2 = ? where match_id = ?" 
+    curse.execute(query,(user_id, match_id))
     database.commit()
     database.close()
     return True
@@ -139,8 +155,8 @@ def update_pic_1(match_id, pic_url_1):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    query = "UPDATE matches SET pic_1 = '%u' where match_id = '%m'" % (pic_url_1, match_id)
-    curse.execute(query)
+    query = "UPDATE matches SET pic_1 = ? where match_id = ?"
+    curse.execute(query,(pic_url_1, match_id))
     database.commit()
     database.close()
     return True
@@ -149,8 +165,8 @@ def update_pic_2(match_id, pic_url_2):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    query = "UPDATE matches SET pic_2 = '%u' where match_id = '%m'" % (pic_url_2, match_id)
-    curse.execute(query)
+    query = "UPDATE matches SET pic_2 = ? where match_id = ?"
+    curse.execute(query,(pic_url_2, match_id))
     database.commit()
     database.close()
     return True
@@ -165,8 +181,8 @@ def update_judge(match_id, username):
     if user_id == -1:
         return -1
 
-    query = "UPDATE matches SET judge = '%u' where match_id = '%m'" % (user_id, match_id)
-    curse.execute(query)
+    query = "UPDATE matches SET judge = ? where match_id = ?" 
+    curse.execute(query,(user_id, match_id))
     database.commit()
     database.close()
     return True
@@ -180,8 +196,8 @@ def update_winner(match_id, username):
     if user_id == -1:
         return -1
 
-    query = "UPDATE matches SET winner = '%u' where match_id = '%m'" % (user_id, match_id)
-    curse.execute(query)
+    query = "UPDATE matches SET winner = ? where match_id = ?"
+    curse.execute(query,(user_id, match_id))
     database.commit()
     database.close()
     return True
@@ -199,24 +215,20 @@ def get_judgable_match():
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT word, match_id, user_1, user_2, pic_1, pic_2 FROM matches WHERE judge IS NULL and winner IS NULL"
+    query =  "SELECT * FROM matches WHERE judge IS NULL and winner IS NULL and pic_1 IS NOT NULL and pic_2 IS NOT NULL"
     db_result = curse.execute(query)
-    if not db_result:
-        return []
-    results = []
-    for word, match_id, user_1, user_2, pic_1, pic_2 in db_result:
-        result = {
-            'word': word,
-            'match_id': match_id,
-            'user_1': user_1,
-            'user_2': user_2,
-            'img_1': pic_1,
-            'img_2': pic_2,
-            'winner': '',
-            'judge': ''
-        }
-        results.append(result)
-    return results
+    db_result = db_result.fetchone()
+    result = {
+        'word': db_result[1],
+        'match_id': db_result[0],
+        'user_1': db_result[2],
+        'user_2': db_result[4],
+        'img_1': db_result[3],
+        'img_2': db_result[5],
+        'winner': db_result[7],
+        'judge': db_result[6]
+    }
+    return result
 
     
 # get_finished_match takes no parameters
@@ -228,38 +240,34 @@ def get_finished_match():
     db_result = {}
     query =  "SELECT word, match_id, user_1, user_2, pic_1, pic_2, winner, judge FROM matches WHERE judge NOT NULL and winner NOT NULL"
     db_result = curse.execute(query)
-    if not db_result:
-        return []
-    results = []
-    for word, match_id, user_1, user_2, pic_1, pic_2, winner, judge in db_result:
-        winner_username = get_username(winner)
-        judge_username = get_username(judge)
-        result = {
-            'word': word,
-            'match_id': match_id,
-            'user_1': user_1,
-            'user_2': user_2,
-            'img_1': pic_1,
-            'img_2': pic_2,
-            'winner': winner_username,
-            'judge': judge_username
-        }
-        results.append(result)
-    return results
+    db_result = db_result.fetchone()
+    return get_match(db_result[0])
 
 # get_match returns a dict like get_finished_match but for a specific match_id
 def get_match(match_id):
-    finished_matches = get_finished_match()
-    for match in finished_matches:
-        if match_id == match['match_id']:
-            return match
-    return {}
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
+    db_result = {}
+    query =  "SELECT * FROM matches WHERE match_id = ?"
+    db_result = curse.execute(query, (match_id,)).fetchone()
+    result = {
+        'word': db_result[1],
+        'match_id': db_result[0],
+        'user_1': db_result[2],
+        'user_2': db_result[4],
+        'img_1': db_result[3],
+        'img_2': db_result[5],
+        'winner': db_result[7],
+        'judge': db_result[6]
+    }
+    return result
 
 # pick_winner takes parameters match_id and winner
 # it sets the winner for the match in the database
 # it returns a boolean because why not
 def pick_winner(match_id, winner):
-    update_winner(match_id, winner_username)
+    update_winner(match_id, winner)
     return True
 
 # get_matches_for_user takes a username
@@ -269,8 +277,8 @@ def get_matches_for_user(username):
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT word, match_id, user_1, user_2, pic_1, pic_2, winner, judge FROM matches WHERE user_1 = %u " % (username)
-    db_result = curse.execute(query)
+    query =  "SELECT word, match_id, user_1, user_2, pic_1, pic_2, winner, judge FROM matches WHERE user_1 = ? " 
+    db_result = curse.execute(query,(username,))
     if not db_result:
         return []
     results = []

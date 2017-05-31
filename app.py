@@ -31,14 +31,16 @@ def mainpage():
 def draw():
     # If there are matches in the database, select the word and get match info from there
     if db.matches_available():
+        print "FOUND A MATCH"
         match_info = db.get_existing_match()
+        print "MATCH INFO: ", match_info
         word = match_info['word']
         match_id = match_info['match_id']
     # Otherwise, pick a random word and make a match with that word with current user as user_1
     else:
         word = get_new_word()
         match_id = db.make_new_match(word, session['username'])
-    # Store the match_id for upload
+    # Store the match_id and username for upload
     session['match_id'] = match_id
     return render_template('match.html', word=word)
 
@@ -50,16 +52,16 @@ def judge():
     # Gets a judgable match and passes it to judge.html
     if request.method == 'GET':
         matchdata = db.get_judgable_match()
-        print matchdata
+        #print matchdata
         session['matchdata'] = matchdata
         return render_template('judge.html', matchdata=matchdata)
     # Removes matchdata from the session so it's not cluttered then sets the winner in the database
     else:
         matchid = session.pop('matchdata')['match_id']
         winuser = str(int(request.form['winner']) + 1)
-        db.pick_winner(matchdata['match_id'], winuser)
+        db.pick_winner(matchid, winuser)
         matchdata = db.get_match(matchid)
-        return render_template('gallery.html', matchdata = matchdata)
+        return render_template('index.html', matchdata = matchdata)
 
 # Profile page
 # Displays all of the matches the user submitted to with the winner highlighted somehow
@@ -82,12 +84,18 @@ def upload():
         match_id = session.pop('match_id')
     # This would be awkward
     else:
-        return 'yikes'
+        return str(session.keys())
     # If the game exists, update it with the picurl.
     if db.game_exists(match_id):
+
         if db.get_match(match_id)['img_1'] == None:
+            print "IMG_1: ",db.get_match(match_id)['img_1']
+            print "UPDOOTING"
             db.update_pic_1(match_id, picurl)
+            print "NEW MATCH THINGS: ",db.get_match(match_id)
         else:
+            print "IMG_2: ",db.get_match(match_id)['img_2']
+            db.update_user_2(match_id, session['username'])
             db.update_pic_2(match_id, picurl)
         #db.update_match(match_id, session['username'], picurl)
     return picurl + "<br>" + str(match_id)
@@ -121,7 +129,7 @@ def login():
             return render_template('login.html', msg="Login invalid.", good=False)
 
 # Xinhui did this. I am not koalafied to comment on this code
-@app.route("/logout")
+@app.route("/logout/")
 def logout():
     if 'username' not in session:
         redirect(url_for('login'))
