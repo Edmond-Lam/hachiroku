@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import hashlib, json
 import requests as req
-from utils import database as db
+from utils import temp_db as db
 import random
 
 # CHILL WITH THE ALL CAPS EDMOND LAM
@@ -59,9 +59,9 @@ def judge():
     else:
         matchid = session.pop('matchdata')['match_id']
         winuser = str(int(request.form['winner']) + 1)
-        db.pick_winner(matchid, winuser)
+        db.update_winner(matchid, winuser)
         matchdata = db.get_match(matchid)
-        return render_template('index.html', matchdata = matchdata)
+        return render_template('index.html', user=session['username'])
 
 # Profile page
 # Displays all of the matches the user submitted to with the winner highlighted somehow
