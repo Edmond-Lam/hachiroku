@@ -22,18 +22,18 @@
       <h1>The word was:<span id="word">{{matchdata['word']}}</span></h1>
 
       <div class="row">
-	<div class="col-sm-6 judgable">
+	<div class="col-sm-6 p-2 judgable">
 	  <h2>Image by {{matchdata['user_1']}}</h2>
 	  <img id="img-1" alt="" src="{{matchdata['img_1']}}"/>
 	</div>
-	<div class="col-sm-6 judgable">
+	<div class="col-sm-6 p-2 judgable">
 	  <h2>Image by {{matchdata['user_2']}}</h2>
 	  <img id="img-2"  src="{{matchdata['img_2']}}"/>
 	</div>
       </div>
 
 	<form action="/judge" method="POST">
-	  <input id="winner" name="winner" type="hidden" value="-1"/>
+	  <input id="winner" name="winner" type="hidden"/>
 	  <input class="btn" name="submit" type="submit" value="Pick Winner"/>
 	</form>
 

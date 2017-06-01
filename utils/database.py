@@ -198,7 +198,7 @@ def update_judge(match_id, username):
     database = sqlite3.connect(path)
     curse = database.cursor()
     # get user id
-    user_id = get_user_id(username)
+    #user_id = get_user_id(username)
     if user_id == -1:
         return -1
 
@@ -208,14 +208,13 @@ def update_judge(match_id, username):
     database.close()
     return True
 
-def update_winner(match_id, username):
+def update_winner(match_id, usernum):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
     #get user id
-    user_id = get_user_id(username)
     query = "UPDATE matches SET winner = ? where match_id = ?"
-    curse.execute(query,(user_id, match_id))
+    curse.execute(query,(usernum, match_id))
     database.commit()
     database.close()
     return True
