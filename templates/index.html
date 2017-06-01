@@ -2,7 +2,7 @@
   <head>
 
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/btn.css">
+<!--    <link rel="stylesheet" href="../static/css/btn.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -12,11 +12,15 @@
   
   </head>
   <body>
-    <div class="burger">
+   <div class="logo">
+     <a href="#"><span class="logo-text">Kakukaku!!</span></a>
+   </div>
+   <div class="burger">
+      
+     <div class="dropdown">
 
-      <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-menu-hamburger" style="font-size:2em;color:black" aria-hidden="true"></span>
-          </a>
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-menu-hamburger" style="font-size:2.5em;color:black" aria-hidden="true"></span>
+       </a>
         <ul class="dropdown-menu dropdown-menu-right">
           <li>
 	    <a href="/profile/{{user}}">
@@ -40,16 +44,19 @@
 
       <div class="full">
 	<div class="container">
-	<div class="row">
-	  <div class="col-md-6">
-	    <a class="btn btn-index" id="btn-draw" href="/draw" role="button">Draw something</a>
 
+
+	 <div class="row">
+	   <div class="col-sm-12 col-md-6">
+	     <h1 style="font-size: 5em;">Hello, {{user}}!</h1>
+	   </div>	   
+		   
+	  <div class="col-sm-12 col-md-6">
+	    <a class="btn btn-index btn-success btn-lg" id="btn-draw" href="/draw" role="button">Draw something</a>
 	    
-	    <a class="btn btn-index" id="btn-judge" href="/judge" role="button">Judge a game</a>
-	  </div>
+	    <a class="btn btn-index btn-warning btn-lg" id="btn-judge" href="/judge" role="button">Judge a game</a>
 
-	  <div class="col-md-6">
-	    <a class="btn btn-index" id="btn-gallery" href="/gallery">View all your matches</a>
+	    <a class="btn btn-default btn-index btn-lg" id="btn-gallery" href="/gallery">View all your matches</a>
 	  </div>
 
 	</div>
