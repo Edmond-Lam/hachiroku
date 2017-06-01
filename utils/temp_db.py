@@ -60,9 +60,11 @@ def get_username(userid):
     database = sqlite3.connect(path)
     curse = database.cursor()
     # get user id
+    if userid == None:
+        return None
     user_query = "SELECT username FROM users WHERE user_id = ?"
     user_result = curse.execute(user_query,(userid,))
-    user_result = user_result.fetchone()
+    user_result = user_result.fetchone()[0]
     print "USER RESULT:", user_result
     if user_result == None:
         return -1
@@ -70,13 +72,13 @@ def get_username(userid):
 
 # matches_available takes no parameters
 # returns a boolean indicating whether matches exist
-def matches_available():
+def matches_available(uname):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT * FROM matches WHERE user_2 is NULL"
-    db_result = curse.execute(query)
+    query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?"
+    db_result = curse.execute(query, (get_user_id(uname),))
     db_result = db_result.fetchall()
     print db_result
     if not db_result:
@@ -85,27 +87,17 @@ def matches_available():
 
 # get_existing_match takes no parameters
 # it returns a list of dicts with keys 'word' and 'match_id'
-def get_existing_match():
+def get_existing_match(uname):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
     results = []
-    query =  'SELECT * FROM matches WHERE pic_2 is NULL OR pic_1 is NULl'
-    db_result = curse.execute(query)
-    db_result = db_result.fetchone()
-    if len(db_result) == 0:
-        return {}
-    result = {
-        'word': db_result[1],
-        'match_id': db_result[0],
-        'user_1': db_result[2],
-        'user_2': db_result[4],
-        'img_1': db_result[3],
-        'img_2': db_result[5],
-        'winner': db_result[7],
-        'judge': db_result[6]
-    }
-    return result
+    query =  'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
+    db_result = curse.execute(query, (get_user_id(uname),))
+    db_result = db_result.fetchone()[0]
+    print "MATCH_RESULT: ", db_result
+    return get_match(db_result)
+
 
 # test
 # print get_existing_match()
@@ -142,14 +134,30 @@ def game_exists(match_id):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
+    print match_id
     query = "SELECT match_id FROM matches WHERE match_id = ?" 
-    result = curse.execute(query,(match_id,))
-    if len(query) > 0:
+    result = curse.execute( query, (match_id,) )
+    result = result.fetchone()
+    if len(result) > 0:
         return True
     return False
 
 # update_match takes a match id, username, and picture url
 # doesn't really need to return anything but return a boolean just in case
+def update_user_1(match_id, username):
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
+    # get user id
+    user_id = get_user_id(username)
+    if user_id == -1:
+        return -1
+    query = "UPDATE matches SET user_1 = ? where match_id = ?" 
+    curse.execute(query,(user_id, match_id))
+    database.commit()
+    database.close()
+    return True
+
 def update_user_2(match_id, username):
     path = "data/data.db"
     database = sqlite3.connect(path)
@@ -228,6 +236,9 @@ def get_judgable_match():
     query =  "SELECT match_id FROM matches WHERE judge IS NULL and winner IS NULL and pic_1 IS NOT NULL and pic_2 IS NOT NULL"
     db_result = curse.execute(query)
     db_result = db_result.fetchone()
+    if db_result == None:
+        return {}
+    print "Match ID: ", db_result[0]
     match = get_match(db_result[0])
     return match
 
@@ -250,15 +261,16 @@ def get_match(match_id):
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
+    print match_id
     query =  "SELECT * FROM matches WHERE match_id = ?"
     db_result = curse.execute(query, (match_id,))
     db_result = db_result.fetchone()
-    print "MATCH FOUND: ", db_result
+    #print "MATCH FOUND: ", db_result
     result = {
         'word': db_result[1],
         'match_id': db_result[0],
-        'user_1': db_result[2],
-        'user_2': db_result[4],
+        'user_1': get_username(db_result[2]),
+        'user_2': get_username(db_result[4]),
         'img_1': db_result[3],
         'img_2': db_result[5],
         'winner': db_result[7],
@@ -280,5 +292,5 @@ def get_matches_for_user(username):
     results = []
     for match in match_ids:
         results.append(get_match(match))
-    print results
+    #print results
     return results  

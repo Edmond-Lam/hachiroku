@@ -30,9 +30,9 @@ def mainpage():
 @app.route('/draw')
 def draw():
     # If there are matches in the database, select the word and get match info from there
-    if db.matches_available():
+    if db.matches_available(session['username']):
         print "FOUND A MATCH"
-        match_info = db.get_existing_match()
+        match_info = db.get_existing_match(session['username'])
         print "MATCH INFO: ", match_info
         word = match_info['word']
         match_id = match_info['match_id']
@@ -86,19 +86,20 @@ def upload():
     else:
         return str(session.keys())
     # If the game exists, update it with the picurl.
+    if type(match_id) is not int:
+        match_id = match_id[0]
     if db.game_exists(match_id):
-
         if db.get_match(match_id)['img_1'] == None:
-            print "IMG_1: ",db.get_match(match_id)['img_1']
-            print "UPDOOTING"
-            db.update_pic_1(match_id, picurl)
-            print "NEW MATCH THINGS: ",db.get_match(match_id)
+            if db.get_match(match_id)['user_1']==session['username']:
+                db.update_pic_1(match_id, picurl)
+            else:
+                db.update_user_1(match_id, session['username'])
+                db.update_pic_1(match_id, picurl)
         else:
-            print "IMG_2: ",db.get_match(match_id)['img_2']
             db.update_user_2(match_id, session['username'])
             db.update_pic_2(match_id, picurl)
         #db.update_match(match_id, session['username'], picurl)
-    return picurl + "<br>" + str(match_id)
+    return redirect(url_for('mainpage'))#picurl + "<br>" + str(match_id)
 
 # Login route
 # Either shows the login page or validates things
