@@ -1,0 +1,20 @@
+=========================
+Bugs that we need to fix:
+=========================
+
+- Nonetype object has no attribute "_getitem_" when clicking on Draw Something. Happens sometimes. When switch account, does not happen.
+  - [Problem: Check logic on getexistingmatch.]
+
+- No display message when there are no matches to be judged.
+
+- View previous matches does not work.
+
+- Going back may cause you to challege yourself.
+  -[Potential fix: Check that the user that matched up does not have the same id.]
+
+- Can judge your own games.
+  - [Potential fix: check match for user ID matching the current user logged in]
+
+- Judging shouldn't display username.
+  - [Note: change this after fixing previous bugs]
+
