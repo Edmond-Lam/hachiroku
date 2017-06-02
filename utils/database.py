@@ -85,6 +85,7 @@ def matches_available(uname):
         return False
     return True
 
+
 # get_existing_match takes no parameters
 # it returns a list of dicts with keys 'word' and 'match_id'
 def get_existing_match(uname):
@@ -94,7 +95,11 @@ def get_existing_match(uname):
     results = []
     query =  'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
     db_result = curse.execute(query, (get_user_id(uname),))
+
+    ###THIS LINE SOMETIMES GET NONETYPE ERROR BECAUSE YOU CAN'T
+    ### DO [0] IF DB_RESULT.FETCHONE() IS NONE
     db_result = db_result.fetchone()[0]
+    
     print "MATCH_RESULT: ", db_result
     return get_match(db_result)
 
