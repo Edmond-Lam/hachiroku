@@ -21,7 +21,7 @@ def get_new_word():
 @app.route('/')
 def mainpage():
     if 'username' in session:
-        return render_template('index.html', user=session['username'])
+        return render_template('index.html', user=session['username'], rank=db.get_rank(session['username']))
     else:
         return redirect(url_for('login'))
 
@@ -61,7 +61,7 @@ def judge():
         winuser = str(int(request.form['winner']) + 1)
         db.update_winner(matchid, winuser)
         matchdata = db.get_match(matchid)
-        return render_template('index.html', user=session['username'])
+        return redirect(url_for('mainpage'))#render_template('index.html', user=session['username'],rank=db.get_rank(session['username']))
 
 # Profile page
 # Displays all of the matches the user submitted to with the winner highlighted somehow

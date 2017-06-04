@@ -300,6 +300,10 @@ def get_matches_for_user(username):
     return results  
 
 
+# get_rank takes a username
+# it returns the number of wins / whatever other rank we want
+def get_rank(username):
+    return 44
 
 '''
 import hashlib
