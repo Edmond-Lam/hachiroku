@@ -95,11 +95,9 @@ def get_existing_match(uname):
     results = []
     query =  'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
     db_result = curse.execute(query, (get_user_id(uname),))
-
     ###THIS LINE SOMETIMES GET NONETYPE ERROR BECAUSE YOU CAN'T
     ### DO [0] IF DB_RESULT.FETCHONE() IS NONE
     db_result = db_result.fetchone()[0]
-    
     print "MATCH_RESULT: ", db_result
     return get_match(db_result)
 
@@ -295,8 +293,8 @@ def get_match(match_id):
     curse = database.cursor()
     db_result = {}
     print match_id
-    query =  "SELECT * FROM matches WHERE match_id = ?"
-    db_result = curse.execute(query, (match_id,))
+    query =  "SELECT * FROM matches WHERE match_id = " + str(match_id)
+    db_result = curse.execute(query)
     db_result = db_result.fetchone()
     #print "MATCH FOUND: ", db_result
     result = {
