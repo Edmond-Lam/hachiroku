@@ -103,7 +103,7 @@ def upload():
 
 @app.route('/gallery', methods=['GET','POST'])
 def gallery():
-    return render_template('gallery.html')
+    return render_template('gallery.html', user=session['username'])
 
 # Login route
 # Either shows the login page or validates things
