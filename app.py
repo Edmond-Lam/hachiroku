@@ -32,8 +32,8 @@ def draw():
     # If there are matches in the database, select the word and get match info from there
     if db.matches_available(session['username']):
         print "FOUND A MATCH"
-        #match_info = db.get_existing_match(session['username'])
-        #print "MATCH INFO: ", match_info
+        match_info = db.get_existing_match(session['username'])
+        print "MATCH INFO: ", match_info
         word = match_info['word']
         match_id = match_info['match_id']
     # Otherwise, pick a random word and make a match with that word with current user as user_1
