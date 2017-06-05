@@ -86,6 +86,12 @@ window.onload = function() {
 	ctx.rect(0,0,canvas.width, canvas.height);
 	ctx.fill();
     };
+
+    document.getElementById("push").onclick = function(e) {
+	imgString = canvas.toDataURL("image/jpeg");
+	document.getElementById("upload").value = imgString;
+	document.getElementById("datForm").submit();
+    };
     
     for (var i = 0; i < document.getElementsByClassName("block").length; i++) {
 	document.getElementsByClassName("block")[i].addEventListener("click", function(e) {

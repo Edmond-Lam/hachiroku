@@ -77,13 +77,15 @@ def matches_available(uname):
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?"
+    query = 'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
+    #query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?"
     db_result = curse.execute(query, (get_user_id(uname),))
-    db_result = db_result.fetchall()
-    print db_result
-    if not db_result:
+    db_result = db_result.fetchone()
+    print "AVAILABLE MATCH", str(db_result)
+    return db_result != None and len(db_result) > 0
+    '''if not db_result:
         return False
-    return True
+    return True'''
 
 
 # get_existing_match takes no parameters
@@ -92,7 +94,6 @@ def get_existing_match(uname):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    results = []
     query =  'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
     db_result = curse.execute(query, (get_user_id(uname),))
     ###THIS LINE SOMETIMES GET NONETYPE ERROR BECAUSE YOU CAN'T
