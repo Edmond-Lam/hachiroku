@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$usr" ]; then
+    echo "No user found. Any args passed will not be logged"
+    read -p "Pick a username: " usr
+    echo "export usr=\"$usr\"" >> ~/.bashrc
+    echo "Username set. You'll no longer need to set it"
+    exec bash
+fi
+echo "" >> devlog.txt
+echo "===" >> devlog.txt
+#usr="dMonteagudo"
+dt=$(date '+%-m/%d/%y %l:%M %p');
+echo "$usr $dt" >> devlog.txt
+echo "" >> devlog.txt
+for var in "$@"
+do
+    echo "- $var" >> devlog.txt
+done
+echo "===" >> devlog.txt
+echo "" >> devlog.txt
+echo "$# changes logged at $dt"

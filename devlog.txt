@@ -91,6 +91,7 @@ dMonteagudo 5/26/17 2:32 PM
 -Added comments that were actually useful.
 ===
 
+===
 lVargas 5/27/17 10:45
 - Finished database work (moderately tested)
 	- Functions added:
@@ -111,4 +112,20 @@ lVargas 5/27/17 10:45
 		- get_match
 		- pick_winner
 		- get_matches_for_user
+
+===
+
+===
+dMonteagudo 6/04/17  8:08 PM
+
+- began setup for ranking system
+===
+
+===
+dMonteagudo 6/04/17  8:17 PM
+
+- updated devlogger tool
+- also tested the devlogger tool by making this entry
+- wow
+===
 
