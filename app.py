@@ -54,6 +54,8 @@ def judge():
         matchdata = db.get_judgable_match()
         #print matchdata
         session['matchdata'] = matchdata
+        if matchdata == None or len(matchdata) == 0:
+            return redirect(url_for('mainpage'))
         print "JUDGING: ", str(matchdata)
         return render_template('judge.html', matchdata=matchdata)
     # Removes matchdata from the session so it's not cluttered then sets the winner in the database

@@ -77,10 +77,12 @@ def matches_available(uname):
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query = 'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
-    #query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?"
+    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL)'
+    #query = 'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
+    #query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?
     db_result = curse.execute(query, (get_user_id(uname),))
-    db_result = db_result.fetchone()
+    #db_result = curse.execute(query, (get_user_id(uname),get_user_id(uname)))
+    db_result = db_result.fetchall()
     print "AVAILABLE MATCH", str(db_result)
     return db_result != None and len(db_result) > 0
     '''if not db_result:
@@ -94,8 +96,10 @@ def get_existing_match(uname):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    query =  'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
+    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL)'
+    #query =  'SELECT match_id FROM matches WHERE user_1 != ? and user_2 != ? and (pic_2 is NULL OR pic_1 is NULL)'
     db_result = curse.execute(query, (get_user_id(uname),))
+    #db_result = curse.execute(query, (get_user_id(uname),get_user_id(uname)))
     ###THIS LINE SOMETIMES GET NONETYPE ERROR BECAUSE YOU CAN'T
     ### DO [0] IF DB_RESULT.FETCHONE() IS NONE
     db_result = db_result.fetchone()[0]
@@ -323,7 +327,8 @@ def get_matches_for_user(username):
     match_ids = db_result.fetchall()
     results = []
     for match in match_ids:
-        results.append(get_match(match))
+        print "FINDING: ", match[0]
+        results.append(get_match(match[0]))
     #print results
     return results  
 
