@@ -213,17 +213,46 @@ def update_judge(match_id, username):
     database.close()
     return True
 
+#updates matches' winner attribute and users' win count
+#usernum is a 1 or 2
 def update_winner(match_id, usernum):
-    path = "data/data.db"
+    path = "../data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    #get user id
-    query = "UPDATE matches SET winner = ? where match_id = ?"
-    curse.execute(query,(usernum, match_id))
-    database.commit()
-    database.close()
-    return True
 
+    #update winner in matches
+    if usernum == 1:
+        query = "UPDATE matches SET winner = 1 where match_id = " + str(match_id)
+        curse.execute(query)
+        database.commit()
+
+        query_2 = "SELECT user_1 FROM matches where match_id = " + str(match_id)
+        db_result = curse.execute(query_2)
+        winner_id = db_result.fetchone()[0]
+        print winner_id
+
+        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
+        curse.execute(query_3)
+        database.commit()
+        database.close()
+
+    else:
+        query = "UPDATE matches SET winner = 2 where match_id = " + str(match_id)
+        curse.execute(query)
+        database.commit()
+
+        query_2 = "SELECT user_2 FROM matches where match_id = " + str(match_id)
+        db_result = curse.execute(query_2)
+        winner_id = db_result.fetchone()[0]
+        print winner_id
+
+        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
+        curse.execute(query_3)
+        database.commit()
+        database.close()
+
+    return True
+    
 # get_finished_match takes no parameters
 # it returns a dict with the following keys:
 #   'word' : the word from the match
@@ -303,7 +332,18 @@ def get_matches_for_user(username):
 # get_rank takes a username
 # it returns the number of wins / whatever other rank we want
 def get_rank(username):
-    return 44
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
+    user_id = get_user_id(username)
+    #print user_id
+    user_query = "SELECT wins FROM users WHERE user_id = ?"
+    user_result = curse.execute(user_query,(user_id,))
+    user_result = user_result.fetchone()[0]
+    #print "USER RESULT:", user_result
+    if user_result == None:
+        return -1
+    return user_result
 
 '''
 import hashlib
