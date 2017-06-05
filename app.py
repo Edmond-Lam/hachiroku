@@ -51,7 +51,7 @@ def draw():
 def judge():
     # Gets a judgable match and passes it to judge.html
     if request.method == 'GET':
-        matchdata = db.get_judgable_match()
+        matchdata = db.get_judgable_match(session['username'])
         #print matchdata
         session['matchdata'] = matchdata
         if matchdata == None or len(matchdata) == 0:

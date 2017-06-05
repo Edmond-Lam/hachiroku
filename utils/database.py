@@ -264,17 +264,17 @@ def update_winner(match_id, usernum):
 #   'img_1' and 'img_2' : the cloudinary urls of the images
 #   'winner' and 'judge' must be NULL
 #   Note: user_1 should own img_1 and the same for user_2 and img_2
-def get_judgable_match():
+def get_judgable_match(uname):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  "SELECT match_id FROM matches WHERE judge IS NULL and winner IS NULL and pic_1 IS NOT NULL and pic_2 IS NOT NULL"
-    db_result = curse.execute(query)
+    query =  "SELECT match_id FROM matches WHERE (user_1 != ? and user_2 != ?) and (judge IS NULL and winner IS NULL and pic_1 IS NOT NULL and pic_2 IS NOT NULL)"
+    db_result = curse.execute(query, (get_user_id(uname), get_user_id(uname)))
     db_result = db_result.fetchone()
     if db_result == None:
         return {}
-    print "Match ID: ", db_result[0]
+    print "Judging match ID: ", db_result[0]
     match = get_match(db_result[0])
     return match
 
