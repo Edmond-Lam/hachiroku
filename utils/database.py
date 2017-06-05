@@ -216,7 +216,7 @@ def update_judge(match_id, username):
 #updates matches' winner attribute and users' win count
 #usernum is a 1 or 2
 def update_winner(match_id, usernum):
-    path = "../data/data.db"
+    path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
 
@@ -252,7 +252,7 @@ def update_winner(match_id, usernum):
         database.close()
 
     return True
-    
+
 # get_finished_match takes no parameters
 # it returns a dict with the following keys:
 #   'word' : the word from the match
