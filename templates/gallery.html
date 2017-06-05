@@ -1,0 +1,57 @@
+<html>
+  <head>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+<!--    <link rel="stylesheet" href="../static/css/btn.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Home | Kakukaku!!</title>
+  
+  </head>
+  <body>
+   <div class="logo">
+     <a href="#"><span class="logo-text">Kakukaku!!</span></a>
+   </div>
+   <div class="burger">
+      
+     <div class="dropdown">
+
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-menu-hamburger" style="font-size:2.5em;color:black" aria-hidden="true"></span>
+       </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+	    <a href="/profile/{{user}}">
+	      <span class="glyphicon glyphicon-user"></span>
+	      Profile
+	    </a>
+	  </li>
+          <li><a href="/notifs">
+	      <span class="glyphicon glyphicon-wrench"></span>
+	      Notifications</a>
+	  </li>
+	  
+	  <li role="separator" class="divider"></li>
+	  
+	  <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span>
+	      Log out</a></li>
+	  
+        </ul>
+      </div>
+    </div>
+
+      <div class="full">
+	<div class="container">
+	  <div class="row">
+	    <h2>My gallery</h2>
+	  </div>
+	  
+	</div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

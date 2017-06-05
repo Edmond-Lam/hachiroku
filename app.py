@@ -101,6 +101,10 @@ def upload():
         #db.update_match(match_id, session['username'], picurl)
     return redirect(url_for('mainpage'))#picurl + "<br>" + str(match_id)
 
+@app.route('/gallery', methods=['GET','POST'])
+def gallery():
+    return render_template('gallery.html')
+
 # Login route
 # Either shows the login page or validates things
 @app.route('/login', methods=['GET', 'POST'])
