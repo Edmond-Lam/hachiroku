@@ -129,3 +129,9 @@ dMonteagudo 6/04/17  8:17 PM
 - wow
 ===
 
+===
+lVargas 6/04/17 11:21 PM
+	- Polished database stuff and added following functions:
+		- working get_rank(username)
+		- working update_winner()
+===
