@@ -342,6 +342,23 @@ def get_rank(username):
         return -1
     return user_result
 
+# returns 
+def get_top_ten_players():
+    path = "data/data.db"
+    database = sqlite3.connect(path)
+    curse = database.cursor()
+    query = "SELECT username, wins FROM users ORDER BY wins DESC LIMIT 10"
+    result = curse.execute(query)
+    result = result.fetchall()
+    final = []
+    for thing in result:
+        dic = {}
+        dic['username'] = thing[0]
+        dic['wins'] = thing[1]
+        final.append(dic)
+    print final
+    return final
+
 '''
 import hashlib
 import sqlite3
