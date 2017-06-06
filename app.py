@@ -75,7 +75,7 @@ def profile(username):
     # print matches
     # Edmond's parents had a little Lam
     # Who's groups devlog was empty like the Sahara desert
-    return render_template('profile.html', matches = matches)
+    return render_template('profile.html', matches = matches, user = username)
 
 # Upload route
 # Uploads the photo to cloudinary and then updates the database with the picurl

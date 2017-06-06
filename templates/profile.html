@@ -1,33 +1,102 @@
 <html>
   <head>
-    <title>Profile</title>
-    <style>
-      .winner {
-      border: 3px solid green;
-      }
-    </style>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+<!--    <link rel="stylesheet" href="../static/css/btn.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    
+    <title>Home | Kakukaku!!</title>
+  
   </head>
   <body>
-    {% for match in matches %}
-    <h2>Match {{match["match_id"]}} {{match["word"]}} won by {{match["winner"]}}</h2>
-    <div class="match">
-      {% if match["winner"] == 1 %}
-      <div class="user1 winner" style="display: inline-block;">
-	{% else %}
-	<div class="user1" style="display: inline-block;">
-	  {% endif %}
-	  <h3>{{match["user_1"]}}</h3>
-	  <img alt="" src="{{match['img_1']}}" style="display: inline-block;"/>
-	</div>
-	{% if match["winner"] == 2 %}
-	<div class="user2 winner" style="display: inline-block;">
-	  {% else %}
-	  <div class="user2" style="display: inline-block;">
-	    {% endif %}
-	    <h3>{{match["user_2"]}}</h3>
-	    <img alt="" src="{{match['img_2']}}" style="display: inline-block;"/>
-	  </div>
-	</div>
-	{% endfor %}
+   <div class="logo">
+     <a href="/"><span class="logo-text">Kakukaku!!</span></a>
+   </div>
+   <div class="burger">
+      
+     <div class="dropdown">
+
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-menu-hamburger" style="font-size:2.5em;color:black" aria-hidden="true"></span>
+       </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+	    <a href="/profile/{{user}}">
+	      <span class="glyphicon glyphicon-user"></span>
+	      Profile
+	    </a>
+	  </li>
+          <li><a href="/notifs">
+	      <span class="glyphicon glyphicon-wrench"></span>
+	      Notifications</a>
+	  </li>
+	  
+	  <li role="separator" class="divider"></li>
+	  
+	  <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span>
+	      Log out</a></li>
+	  
+        </ul>
+     </div>
+   </div>
+
+   <div class="container" style="margin-top: 4%">
+
+     <h1>{{user}}'s Profile</h1>
+     
+     {% for match in matches %}    
+     <h3><!--Match {{match["match_id"]}},-->Match keyword: {{match["word"]}}</h3>
+     <div class="row">
+       
+       <div class="col-sm-6">
+
+	 <div class="thumbnail">
+
+	   {% if match["winner"] == 1 %}
+	   <div class="user1 winner">
+	     {% else %}
+	     <div class="user1">
+	       {% endif %}
+	       <img alt="" src="{{match['img_1']}}"/>
+	       <div class="caption">
+		 {{match["user_1"]}}
+	       </div>
+	       
+	     </div>	     
+	     
+	   </div>
+	   
+	 </div>
+
+	 
+	 <div class="col-sm-6">
+	   
+	   <div class="thumbnail">
+	     {% if match["winner"] == 2 %}
+	     <div class="user2 winner">
+	       {% else %}
+	       <div class="user2">
+		 {% endif %}
+
+		 <img alt="" src="{{match['img_2']}}"/>
+		 <div class="caption">
+		   {{match["user_2"]}}
+		 </div>
+		 
+	       </div>
+	     </div>
+	   </div>
+	   
+	 </div>
+
+       </div>
+       {% endfor %}
+       
+     </div>
+
   </body>
 </html>
+
