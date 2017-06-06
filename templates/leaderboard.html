@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>Leaderboard</title>
+  </head>
+  <body>
+    <h1>Top Artists</h1>
+    {% for leader in leaders %}
+    <h2><a href="/profile/{{leader['username']}}">{{leader["username"]}}, with {{leader["wins"]}} wins</a></h2>
+    {% endfor %}
+  </body>
+</html>
