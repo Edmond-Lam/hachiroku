@@ -150,6 +150,7 @@ def logout():
     return redirect(url_for("login", msg = "Logged out.", good=True))
 
 # Who actually knows what this does. Some sort of black magic I think
+# Fluffy dragons. -Edmond Lam / Vyle
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False 
     app.run()
