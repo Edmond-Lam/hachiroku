@@ -61,7 +61,7 @@ def judge():
     # Removes matchdata from the session so it's not cluttered then sets the winner in the database
     else:
         matchid = session.pop('matchdata')['match_id']
-        winuser = str(int(request.form['winner']) + 1)
+        winuser = int(request.form['winner']) + 1
         print "Winning user: ", winuser
         db.update_winner(matchid, winuser)
         matchdata = db.get_match(matchid)
