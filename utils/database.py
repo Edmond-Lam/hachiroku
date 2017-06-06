@@ -322,7 +322,7 @@ def get_matches_for_user(username):
     curse = database.cursor()
     db_result = {}
     user_id = get_user_id(username)
-    query =  "SELECT match_id FROM matches WHERE user_1 = ? OR user_2 = ?" 
+    query =  "SELECT match_id FROM matches WHERE (user_1 = ? OR user_2 = ?) and pic_1 IS NOT NULL and pic_2 IS NOT NULL" 
     db_result = curse.execute(query,(user_id,user_id))
     match_ids = db_result.fetchall()
     results = []

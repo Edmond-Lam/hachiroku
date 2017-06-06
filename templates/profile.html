@@ -9,7 +9,7 @@
   </head>
   <body>
     {% for match in matches %}
-    <h2>Match {{match["match_id"]}}</h2>
+    <h2>Match {{match["match_id"]}} {{match["word"]}}</h2>
     <div class="match">
       {% if match["winner"] == "user_1" %}
       <div class="user1" style="display: inline-block;">

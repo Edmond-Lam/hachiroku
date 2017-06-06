@@ -4,3 +4,4 @@ Bugs that we need to fix:
 
 - No display message when there are no matches to be judged.
 
+- Ranking system not quite correct
