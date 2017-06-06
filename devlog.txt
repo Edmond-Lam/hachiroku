@@ -116,6 +116,12 @@ lVargas 5/27/17 10:45
 ===
 
 ===
+xXu 5/29/17 8:32 PM
+- Main website pages finished, with styling included from a CSS file
+- Linked most of the flask routes to the pages\
+===
+
+===
 dMonteagudo 6/04/17  8:08 PM
 
 - began setup for ranking system
