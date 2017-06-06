@@ -222,38 +222,31 @@ def update_winner(match_id, usernum):
     path = "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-
     #update winner in matches
     if usernum == 1:
-        query = "UPDATE matches SET winner = 1 where match_id = " + str(match_id)
-        curse.execute(query)
+        query = "UPDATE matches SET winner = 1 where match_id = ?"
+        curse.execute(query, (match_id,))
         database.commit()
-
-        query_2 = "SELECT user_1 FROM matches where match_id = " + str(match_id)
-        db_result = curse.execute(query_2)
+        query_2 = "SELECT user_1 FROM matches where match_id = ?" 
+        db_result = curse.execute(query_2, (match_id,))
         winner_id = db_result.fetchone()[0]
         print winner_id
-
-        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
-        curse.execute(query_3)
+        query_3 = "UPDATE users SET wins = wins + 1 where user_id = ?"
+        curse.execute(query_3, (winner_id,))
         database.commit()
         database.close()
-
     else:
-        query = "UPDATE matches SET winner = 2 where match_id = " + str(match_id)
-        curse.execute(query)
+        query = "UPDATE matches SET winner = 2 where match_id = ?"
+        curse.execute(query, (match_id,))
         database.commit()
-
-        query_2 = "SELECT user_2 FROM matches where match_id = " + str(match_id)
-        db_result = curse.execute(query_2)
+        query_2 = "SELECT user_2 FROM matches where match_id = ?"
+        db_result = curse.execute(query_2, (match_id,))
         winner_id = db_result.fetchone()[0]
         print winner_id
-
-        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
-        curse.execute(query_3)
+        query_3 = "UPDATE users SET wins = wins + 1 where user_id = ?"
+        curse.execute(query_3, (winner_id,))
         database.commit()
         database.close()
-
     return True
 
 # get_finished_match takes no parameters

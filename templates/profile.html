@@ -9,20 +9,20 @@
   </head>
   <body>
     {% for match in matches %}
-    <h2>Match {{match["match_id"]}} {{match["word"]}}</h2>
+    <h2>Match {{match["match_id"]}} {{match["word"]}} won by {{match["winner"]}}</h2>
     <div class="match">
-      {% if match["winner"] == "user_1" %}
-      <div class="user1" style="display: inline-block;">
+      {% if match["winner"] == 1 %}
+      <div class="user1 winner" style="display: inline-block;">
 	{% else %}
-	<div class="user1 winner" style="display: inline-block;">
+	<div class="user1" style="display: inline-block;">
 	  {% endif %}
 	  <h3>{{match["user_1"]}}</h3>
 	  <img alt="" src="{{match['img_1']}}" style="display: inline-block;"/>
 	</div>
-	{% if match["winner"] == "user_2" %}
-	<div class="user2" style="display: inline-block;">
+	{% if match["winner"] == 2 %}
+	<div class="user2 winner" style="display: inline-block;">
 	  {% else %}
-	  <div class="user2 winner" style="display: inline-block;">
+	  <div class="user2" style="display: inline-block;">
 	    {% endif %}
 	    <h3>{{match["user_2"]}}</h3>
 	    <img alt="" src="{{match['img_2']}}" style="display: inline-block;"/>

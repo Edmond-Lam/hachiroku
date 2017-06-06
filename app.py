@@ -62,6 +62,7 @@ def judge():
     else:
         matchid = session.pop('matchdata')['match_id']
         winuser = str(int(request.form['winner']) + 1)
+        print "Winning user: ", winuser
         db.update_winner(matchid, winuser)
         matchdata = db.get_match(matchid)
         return redirect(url_for('mainpage'))#render_template('index.html', user=session['username'],rank=db.get_rank(session['username']))
