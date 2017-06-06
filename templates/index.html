@@ -42,8 +42,11 @@
       <div class="full" style="background-image:url('../static/kkbg.png');background-size:cover;">
 	<div class="container" style="margin-bottom:7em;">
 
-
-	 <div class="row">
+	  
+	  <div class="row">
+	    {% if msg is defined %}
+	      <p>{{msg}}</p>
+	      {% endif %}
 	   <div class="col-sm-12 col-md-6">
 	     <h1 style="font-size: 5em;">Hello, {{user}}!</h1>
 	     <h2>You have {{rank}} wins</h2>
