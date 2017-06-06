@@ -143,3 +143,11 @@ dMonteagudo 6/05/17  7:53 PM
 - fixed judging your own matches
 ===
 
+
+===
+dMonteagudo 6/05/17  9:58 PM
+
+- sanitized db
+- created basic leaderboard functionality
+===
+

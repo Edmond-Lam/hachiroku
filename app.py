@@ -137,6 +137,10 @@ def login():
         else:
             return render_template('login.html', msg="Login invalid.", good=False)
 
+@app.route("/leaderboard")
+def leaderboard():
+    return render_template('leaderboard.html', leaders=db.get_top_ten_players())
+
 # Xinhui did this. I am not koalafied to comment on this code
 @app.route("/logout/")
 def logout():

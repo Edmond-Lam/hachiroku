@@ -30,42 +30,20 @@ def get_username(userid):
     return user_result
 
 
-def update_winner(match_id, usernum):
+def get_top_ten_players():
     path = "../data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
+    query = "SELECT username, wins FROM users ORDER BY wins DESC LIMIT 10"
+    result = curse.execute(query)
+    result = result.fetchall()
+    final = []
+    for thing in result:
+        dic = {}
+        dic['username'] = thing[0]
+        dic['wins'] = thing[1]
+        final.append(dic)
+    print final
+    return final
 
-    #update winner in matches
-    if usernum == 1:
-        query = "UPDATE matches SET winner = 1 where match_id = " + str(match_id)
-        curse.execute(query)
-        database.commit()
-
-        query_2 = "SELECT user_1 FROM matches where match_id = " + str(match_id)
-        db_result = curse.execute(query_2)
-        winner_id = db_result.fetchone()[0]
-        print winner_id
-
-        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
-        curse.execute(query_3)
-        database.commit()
-        database.close()
-
-    else:
-        query = "UPDATE matches SET winner = 2 where match_id = " + str(match_id)
-        curse.execute(query)
-        database.commit()
-
-        query_2 = "SELECT user_2 FROM matches where match_id = " + str(match_id)
-        db_result = curse.execute(query_2)
-        winner_id = db_result.fetchone()[0]
-        print winner_id
-
-        query_3 = "UPDATE users SET wins = wins + 1 where user_id = " + str(winner_id)
-        curse.execute(query_3)
-        database.commit()
-        database.close()
-
-    return True
-
-#update_winner(6, 1)
+get_top_ten_players()
