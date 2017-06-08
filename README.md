@@ -5,15 +5,3 @@
 
 A rank system is also implemented to rate the skills of each drawer—you will gain or lose points based on your performance. You can also view your match history.
 
-## Devlog memes to invigorate my teammates into actually devlogging their changes
-
-![alt text](http://i.imgur.com/C6OL19d.png "Meme 1")
-
-
-![alt text](http://i.imgur.com/LQ1tZEV.jpg "Meme 2")
-
-
-![alt text](http://i.imgur.com/WsBAZ11.png "Meme 3")
-
-
-![alt text](http://i.imgur.com/8QQowfu.png "Meme 4")
