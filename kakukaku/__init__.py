@@ -2,16 +2,18 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import hashlib, json
 import requests as req
 from utils import database as db
-import random
+import random, os
 
 # CHILL WITH THE ALL CAPS EDMOND LAM
 
 # Declaring app and secret key for session encryption
 app = Flask(__name__)
 app.secret_key = 'Maddy says hi'
+DIR = os.path.dirname(__file__) or '.'
+DIR += '/'
 
 def get_new_word():
-    wordl = open('nounlist.txt', 'r')
+    wordl = open(DIR + 'nounlist.txt', 'r')
     noun = random.choice(wordl.read().split())
     wordl.close()
     return noun
