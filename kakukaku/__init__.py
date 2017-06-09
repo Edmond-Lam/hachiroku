@@ -38,6 +38,7 @@ def draw():
         print "MATCH INFO: ", match_info
         word = match_info['word']
         match_id = match_info['match_id']
+        db.update_user_2(match_id,session['username'])
     # Otherwise, pick a random word and make a match with that word with current user as user_1
     else:
         word = get_new_word()

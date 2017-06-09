@@ -5,7 +5,6 @@ import os
 DIR = os.path.dirname(__file__)
 DIR = DIR[:DIR.index("utils")] + "/"
 
-print DIR
 # check_login takes a parameter for username and a hashed password
 # returns a boolean indicating whether the username-password pair is valid
 def check_login(username, hashed_pw):
@@ -76,7 +75,7 @@ def matches_available(uname):
     database = sqlite3.connect(path)
     curse = database.cursor()
     db_result = {}
-    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL)'
+    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL) and user_2 IS NULL'
     #query = 'SELECT match_id FROM matches WHERE pic_2 is NULL OR pic_1 is NULL and user_1 IS NOT ?'
     #query =  "SELECT * FROM matches WHERE user_2 is NULL and user_1 IS NOT ?
     db_result = curse.execute(query, (get_user_id(uname),))
