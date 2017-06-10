@@ -129,7 +129,7 @@ def login():
         password.update(request.form['pass'])
         password = password.hexdigest()
 
-        if 'register' in request.form:
+        if 'register' in request.form and request.form['user'] != "":
             db.create_user(username,str(password))
             # Does not update the devlog
             return render_template('login.html', msg="Successfully registered!", good=True)
