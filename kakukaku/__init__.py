@@ -91,7 +91,7 @@ def upload():
         match_id = session.pop('match_id')
     # This would be awkward
     else:
-        return str(session.keys())
+        return "Yikes"
     # If the game exists, update it with the picurl.
     if type(match_id) is not int:
         match_id = match_id[0]

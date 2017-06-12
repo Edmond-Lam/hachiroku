@@ -1,6 +1,7 @@
 import hashlib
 import sqlite3
 import os
+import random
 
 DIR = os.path.dirname(__file__)
 DIR = DIR[:DIR.index("utils")] + "/"
@@ -94,13 +95,14 @@ def get_existing_match(uname):
     path = DIR + "data/data.db"
     database = sqlite3.connect(path)
     curse = database.cursor()
-    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL)'
+    query =  'SELECT match_id FROM matches WHERE user_1 != ? and (pic_2 is NULL OR pic_1 is NULL) AND user_2 IS NULL'
     #query =  'SELECT match_id FROM matches WHERE user_1 != ? and user_2 != ? and (pic_2 is NULL OR pic_1 is NULL)'
     db_result = curse.execute(query, (get_user_id(uname),))
     #db_result = curse.execute(query, (get_user_id(uname),get_user_id(uname)))
     ###THIS LINE SOMETIMES GET NONETYPE ERROR BECAUSE YOU CAN'T
     ### DO [0] IF DB_RESULT.FETCHONE() IS NONE
-    db_result = db_result.fetchone()[0]
+    db_result = db_result.fetchall()
+    db_result = random.choice(db_result)[0]
     print "MATCH_RESULT: ", db_result
     return get_match(db_result)
 
